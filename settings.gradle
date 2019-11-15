@@ -1,0 +1,2 @@
+include ':sevenzipjbinding'
+rootProject.name='SevenZipJBinding'

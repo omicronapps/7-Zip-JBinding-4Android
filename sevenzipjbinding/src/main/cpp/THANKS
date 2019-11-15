@@ -1,0 +1,24 @@
+7-Zip-JBinding THANKS file
+
+7-Zip-JBinding has originally been written by Boris Brodski.
+Many people have further contributed to it by reporting problems, 
+suggesting various improvements, or submitting actual code. Here is
+a list of these people. Help me keep it complete and exempt of errors.
+
+
+Special thanks to
+- Reinhard Pointner and the FileBot user community (for testing and donations)
+
+- Masoud (for pointing me to the most weird error in the C++ <-> Java exception handling)
+
+- Victor Martinez (for getting 7-Zip-JBinding to work with JNLP)
+
+- Michael Brodski, RWTH Aachen (for spell checking and playing Dr. Watson :) )
+
+- Jeroen Frijters, IKVM developer (for finding a bug: CallIntMethod instead of CallLongMethod in InStream.Seek binding)
+
+- Daniel Santos (for providing gcc 4.7 patch, bug-id: 3593757)
+
+- M. Hamer (for reporting bug "Simple Interface returns wrong CRC", bug-id: 3535546)
+
+- Gert Hulselmans for reporting Bug #17 (WIM archive format contains Udf comment)

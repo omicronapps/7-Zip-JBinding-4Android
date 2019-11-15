@@ -203,13 +203,13 @@ public class SevenZip {
     private static final String SEVENZIPJBINDING_LIB_PROPERTIES_FILENAME = "sevenzipjbinding-lib.properties";
     private static final String SEVENZIPJBINDING_PLATFORMS_PROPRETIES_FILENAME = "/sevenzipjbinding-platforms.properties";
 
-    private static final String SEVENZIPJBINDING_PLATFORM = "Linux-amd64";
+    private static final String SEVENZIPJBINDING_PLATFORM = "arm64-v8a";
     private static final String SEVENZIPJBINDING_LIB_FILENAME = "7-Zip-JBinding";
     private static final String SEVENZIPJBINDING_MANIFEST_MF =
                     "Manifest-Version: 1.0\n" +
                     "CMake: 2.8.11\n" +
                     "Created-By: 1.6.0_33-b03 (Sun Microsystems Inc.)\n" +
-                    "Implementation-Title: 7-Zip-JBinding native lib (Linux-amd64)\n" +
+                    "Implementation-Title: 7-Zip-JBinding native lib (arm64-v8a)\n" +
                     "Implementation-Vendor: sevenzipjbind.sf.net\n" +
                     "Implementation-Version: 9.20-2.00beta\n" +
                     "Built-By: Boris Brodski\n" +

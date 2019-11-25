@@ -41,6 +41,10 @@
 #include <stdarg.h>
 #include "JObjectList.h"
 
+#ifdef __ANDROID_API__
+#include "JBindingTools.h"
+#endif
+
 // TODO Remove from here
 #define JBINDING_JNIEXPORT extern "C" JNIEXPORT
 
@@ -684,6 +688,11 @@ private:
     void init(JNIEnv * env) {
         TRACE ("env->FindClass() for " << _fullname)
         jclass clazz = env->FindClass(_fullname);
+#ifdef __ANDROID_API__
+        if (clazz == nullptr) {
+            clazz = findClass(env, _fullname);
+        }
+#endif
         FATALIF1(!clazz, "Error finding class '%s'", _fullname)
         _jclass = static_cast<jclass> (env->NewGlobalRef(clazz));
         MY_ASSERT(_jclass);

@@ -33,6 +33,59 @@ static struct {
                               {E_INVALIDARG, "Invalid argument"}, // ((HRESULT)0x80070057L)
                               {0, NULL}, };
 
+#ifdef __ANDROID_API__
+jmethodID JBindingSession::_classLoaderID;
+std::map<const char*, jobject> JBindingSession::_classLoaderObjects;
+
+static jobject addClassLoaderObject(JNIEnv* env, const char* name) {
+    jclass clazz = env->FindClass(name);
+    jclass objectClass = env->GetObjectClass(clazz);
+    jmethodID classLoaderID = env->GetMethodID(objectClass, "getClassLoader", "()Ljava/lang/ClassLoader;");
+    jobject classLoaderObject = env->CallObjectMethod(clazz, classLoaderID);
+    return env->NewGlobalRef(classLoaderObject);
+}
+
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *pjvm, void *reserved) {
+    JNIEnv* env = nullptr;
+    if (pjvm->GetEnv((void**)&env, JNI_VERSION_1_6) == JNI_OK) {
+        jclass classLoaderClass = env->FindClass("java/lang/ClassLoader");
+        JBindingSession::_classLoaderID = env->GetMethodID(classLoaderClass, "findClass", "(Ljava/lang/String;)Ljava/lang/Class;");
+
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(PROPERTYINFO_CLASS, addClassLoaderObject(env, PROPERTYINFO_CLASS)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(PROPID_CLASS, addClassLoaderObject(env, PROPID_CLASS)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEQUENTIALOUTSTREAM_CLASS, addClassLoaderObject(env, SEQUENTIALOUTSTREAM_CLASS)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEQUENTIALINSTREAM_CLASS, addClassLoaderObject(env, SEQUENTIALINSTREAM_CLASS)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(INSTREAM_CLASS, addClassLoaderObject(env, INSTREAM_CLASS)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(CRYPTOGETTEXTPASSWORD_CLASS, addClassLoaderObject(env, CRYPTOGETTEXTPASSWORD_CLASS)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(ARCHIVEOPENVOLUMECALLBACK_CLASS, addClassLoaderObject(env, ARCHIVEOPENVOLUMECALLBACK_CLASS)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(EXTRACTASKMODE_CLASS, addClassLoaderObject(env, EXTRACTASKMODE_CLASS)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(EXTRACTOPERATIONRESULT_CLASS, addClassLoaderObject(env, EXTRACTOPERATIONRESULT_CLASS)));
+
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_OBJECT, addClassLoaderObject(env, JAVA_OBJECT)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_BYTE, addClassLoaderObject(env, JAVA_BYTE)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_CHARACTER, addClassLoaderObject(env, JAVA_CHARACTER)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_SHORT, addClassLoaderObject(env, JAVA_SHORT)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_NUMBER, addClassLoaderObject(env, JAVA_NUMBER)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_INTEGER, addClassLoaderObject(env, JAVA_INTEGER)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_LONG, addClassLoaderObject(env, JAVA_LONG)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_FLOAT, addClassLoaderObject(env, JAVA_FLOAT)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_DOUBLE, addClassLoaderObject(env, JAVA_DOUBLE)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_BOOLEAN, addClassLoaderObject(env, JAVA_BOOLEAN)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_STRING, addClassLoaderObject(env, JAVA_STRING)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_THROWABLE, addClassLoaderObject(env, JAVA_THROWABLE)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_DATE, addClassLoaderObject(env, JAVA_DATE)));
+    }
+    return JNI_VERSION_1_6;
+}
+
+jclass findClass(JNIEnv* env, const char* name) {
+    if (env->ExceptionCheck()) {
+        env->ExceptionClear();
+    }
+    return static_cast<jclass>(env->CallObjectMethod(JBindingSession::_classLoaderObjects.at(name), JBindingSession::_classLoaderID, env->NewStringUTF(name)));
+}
+#endif
+
 /*
  * Return error message from error code
  */

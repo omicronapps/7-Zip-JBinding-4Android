@@ -31,8 +31,17 @@ public:
         TRACE_OBJECT_CREATION("CPPToJavaArchiveOpenCallback")
 
 		JNIEnvInstance jniEnvInstance(_jbindingSession);
+#ifdef __ANDROID_API__
+        _outArchive = jniEnvInstance->NewGlobalRef(_outArchive);
+#endif
     }
 
+#ifdef __ANDROID_API__
+    ~CPPToJavaArchiveUpdateCallback() {
+        JNIEnvInstance jniEnvInstance(_jbindingSession);
+        jniEnvInstance->DeleteGlobalRef(_outArchive);
+    }
+#endif
     STDMETHOD(GetUpdateItemInfo)(UInt32 index, Int32 *newData, /*1 - new data, 0 - old data */
     Int32 *newProperties, /* 1 - new properties, 0 - old properties */
     UInt32 *indexInArchive /* -1 if there is no in archive, or if doesn't matter */

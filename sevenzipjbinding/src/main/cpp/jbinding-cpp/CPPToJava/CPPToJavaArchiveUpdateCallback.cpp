@@ -358,6 +358,11 @@ STDMETHODIMP CPPToJavaArchiveUpdateCallback::GetStream(UInt32 index, ISequential
     if (inStreamImpl) {
 
         jclass inStreamInterface = jniEnvInstance->FindClass(INSTREAM_CLASS);
+#ifdef __ANDROID_API__
+        if (inStreamInterface == nullptr) {
+            inStreamInterface = findClass(jniEnvInstance, INSTREAM_CLASS);
+        }
+#endif
         FATALIF(!inStreamInterface, "Class " INSTREAM_CLASS " not found");
 
         if (jniEnvInstance->IsInstanceOf(inStreamImpl, inStreamInterface)) {

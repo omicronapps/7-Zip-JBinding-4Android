@@ -49,7 +49,11 @@ void CodecTools::init() {
 static int getIndexByName(JNIEnv * env, jstring formatName) {
 	const jchar * formatNameJChars = env->GetStringChars(formatName, NULL);
 	UString formatNameString;
+#ifdef __ANDROID_API__
 	formatNameString = UnicodeHelper(formatNameJChars, env->GetStringLength(formatName));
+#else
+	formatNameString = UnicodeHelper(formatNameJChars);
+#endif
 	env->ReleaseStringChars(formatName, formatNameJChars);
 
 	TRACE("Format: " << formatNameString)

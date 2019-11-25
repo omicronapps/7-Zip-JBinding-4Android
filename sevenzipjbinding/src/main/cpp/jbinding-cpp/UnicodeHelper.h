@@ -16,7 +16,9 @@ private:
 
 	const jchar * _jcharString;
 	jchar * _jcharBuffer;
+#ifdef __ANDROID_API__
 	jsize _jlen;
+#endif
 
 public:
 	UnicodeHelper(const wchar_t * unicodeString) {
@@ -24,15 +26,23 @@ public:
 		_jcharString = NULL;
 		_jcharBuffer = NULL;
 		_unicodeBuffer = NULL;
+#ifdef __ANDROID_API__
 		_jlen = 0;
+#endif
 	}
 
-	UnicodeHelper(const jchar * jcharString, jsize jlen) {
+#ifdef __ANDROID_API__
+		UnicodeHelper(const jchar * jcharString, jsize jlen) {
+#else
+		UnicodeHelper(const jchar * jcharString) {
+#endif
 		_jcharString = jcharString;
 		_unicodeString = NULL;
 		_jcharBuffer = NULL;
 		_unicodeBuffer = NULL;
+#ifdef __ANDROID_API__
 		_jlen = jlen;
+#endif
 	}
 
 	~UnicodeHelper() {
@@ -49,7 +59,11 @@ public:
 		if (_unicodeBuffer) {
 //			TRACE("Freeing unicode string");
 #ifndef _DEBUG
+			#ifdef __ANDROID_API__
 			size_t len = (size_t) _jlen;
+#else
+			size_t len = jcharlen(_jcharString);
+#endif
 			memset(_unicodeBuffer, 0, sizeof(wchar_t) * (len + 1));
 #endif // _DEBUG
 			delete[] _unicodeBuffer;
@@ -86,7 +100,11 @@ public:
 			_unicodeString = (wchar_t*) (_jcharString);
 			return _unicodeString;
 		}
+#ifdef __ANDROID_API__
 		size_t len = (size_t) _jlen;
+#else
+		size_t len = jcharlen(_jcharString);
+#endif
 //		TRACE1("len: %i" , len)
 		_unicodeBuffer = new wchar_t[len + 1];
 		for (size_t i = 0; i < len; i++) {

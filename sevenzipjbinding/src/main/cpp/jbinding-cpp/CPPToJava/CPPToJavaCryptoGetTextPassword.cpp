@@ -26,7 +26,11 @@ STDMETHODIMP CPPToJavaCryptoGetTextPassword::CryptoGetTextPassword(BSTR * passwo
 
         //printf("PASSWORD: '%S'\n", (BSTR)passwordBSTR);
         //fflush(stdout);
+#ifdef __ANDROID_API__
         StringToBstr(UString(UnicodeHelper(passwordJChars, jniEnvInstance->GetStringLength(passwordString))), password);//passwordBSTR.MyCopy();
+#else
+        StringToBstr(UString(UnicodeHelper(passwordJChars)), password);//passwordBSTR.MyCopy();
+#endif
         jniEnvInstance->ReleaseStringChars(passwordString, passwordJChars);
     }
 

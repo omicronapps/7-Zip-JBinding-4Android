@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.jar.Manifest;
@@ -48,7 +50,9 @@ public class VersionTest extends JUnitNativeTestBase {
     }
 
     private String getVersionFromJarMANIFEST() throws Exception {
-        Manifest manifest = SevenZip.getManifest();
+        byte[] buf = SevenZip.SEVENZIPJBINDING_MANIFEST_MF.getBytes();
+        InputStream is = new ByteArrayInputStream(buf);
+        Manifest manifest = new Manifest(is);
         String title = manifest.getMainAttributes().getValue("Implementation-Title");
         if (title != null && title.startsWith("7-Zip-JBinding native lib")) {
             String version = manifest.getMainAttributes().getValue("Implementation-Version");

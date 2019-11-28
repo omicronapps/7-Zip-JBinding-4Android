@@ -26,7 +26,6 @@ import net.sf.sevenzipjbinding.junit.tools.RandomContext;
 import net.sf.sevenzipjbinding.util.ByteArrayStream;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public abstract class CompressSingleFileAbstractTest<T extends IOutItemBase> extends CompressAbstractTest {
@@ -814,21 +813,18 @@ public abstract class CompressSingleFileAbstractTest<T extends IOutItemBase> ext
     }
 
     @Test
-    @Ignore
     // TODO Separate stress tests from functional tests
     public void test20000000Entropy50() throws Exception {
         doTest(20000000, 50, false);
     }
 
     @Test
-    @Ignore
     // TODO Separate stress tests from functional tests
     public void test20000000Entropy50Multithreaded() throws Exception {
         doTest(20000000, 50, true);
     }
 
     @Test
-    @Ignore
     // TODO Separate stress tests from functional tests
     public void test500000000Entropy50() throws Exception {
         doTest(500000000, 50);

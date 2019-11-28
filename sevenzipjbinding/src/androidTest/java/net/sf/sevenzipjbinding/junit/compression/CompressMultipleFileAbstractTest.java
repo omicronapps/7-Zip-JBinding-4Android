@@ -10,7 +10,6 @@ import net.sf.sevenzipjbinding.junit.tools.VirtualContent.VirtualContentConfigur
 import net.sf.sevenzipjbinding.util.ByteArrayStream;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public abstract class CompressMultipleFileAbstractTest extends CompressAbstractTest {
@@ -86,14 +85,12 @@ public abstract class CompressMultipleFileAbstractTest extends CompressAbstractT
         fillRandomlyAndTest(3, 1, 1, 300, 200, true);
     }
 
-    @Ignore
     @Test
     public void compress65FilesManyDepthDirs() throws Exception {
         virtualContentConfiguration.setAllowEmptyFiles(true);
         fillRandomlyAndTest(65, 5, 2, 200, 150, false);
     }
 
-    @Ignore
     @Test
     public void compress65FilesManyDepthDirsMultithreaded() throws Exception {
         virtualContentConfiguration.setAllowEmptyFiles(true);
@@ -106,34 +103,29 @@ public abstract class CompressMultipleFileAbstractTest extends CompressAbstractT
         fillRandomlyAndTest(20, 15, 1, 200, 150, false);
     }
 
-    @Ignore
     @Test
     public void compress20FilesVeryDeepDirsMultithreaded() throws Exception {
         virtualContentConfiguration.setAllowEmptyFiles(true);
         fillRandomlyAndTest(20, 15, 1, 200, 150, true);
     }
 
-    @Ignore
     @Test
     public void compress90FilesManyDirs() throws Exception {
         virtualContentConfiguration.setAllowEmptyFiles(true);
         fillRandomlyAndTest(90, 3, 4, 200, 150, false);
     }
 
-    @Ignore
     @Test
     public void compress90FilesManyDirsMultithreaded() throws Exception {
         virtualContentConfiguration.setAllowEmptyFiles(true);
         fillRandomlyAndTest(90, 3, 4, 200, 150, true);
     }
 
-    @Ignore
     @Test
     public void compress10BigFiles() throws Exception {
         fillRandomlyAndTest(10, 1, 2, OUTARCHIVE_MAX_SIZE / 11, 5000, false);
     }
 
-    @Ignore
     @Test
     public void compress10BigFilesMultithreaded() throws Exception {
         fillRandomlyAndTest(10, 1, 2, OUTARCHIVE_MAX_SIZE / 11, 5000, true);
@@ -145,13 +137,11 @@ public abstract class CompressMultipleFileAbstractTest extends CompressAbstractT
      * @throws Exception
      *             not expected
      */
-    @Ignore
     @Test
     public void compress100BigFilesCoreDump() throws Exception {
         fillRandomlyAndTest(50, 1, 2, 80000, 5000, false); //.writeToDirectory(new File("testoutput-1"));
     }
 
-    @Ignore
     @Test
     public void compress100BigFilesCoreDumpMultithreaded() throws Exception {
         fillRandomlyAndTest(50, 1, 2, 80000, 5000, true);

@@ -8,7 +8,6 @@ import net.sf.sevenzipjbinding.IInArchive;
 import net.sf.sevenzipjbinding.IOutItemBase;
 import net.sf.sevenzipjbinding.PropID;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> extends UpdateAbstractTest<T> {
@@ -83,86 +82,74 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
         return -1;
     }
 
-    @Ignore
     @Test
     public void testEmptyUpdateConfFlat() throws Exception {
         testUpdate(false, CONF_FLAT);
     }
 
-    @Ignore
     @Test
     public void testEmptyUpdateConfFlatMultithreaded() throws Exception {
         testUpdate(true, CONF_FLAT);
     }
 
-    @Ignore
     @Test
     public void testEmptyUpdateConfDeepFlat() throws Exception {
         testUpdate(false, CONF_DEEP);
     }
 
-    @Ignore
     @Test
     public void testEmptyUpdateConfDeepMultithreaded() throws Exception {
         testUpdate(true, CONF_DEEP);
     }
 
-    @Ignore
     @Test
     public void testUpdateContentConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterContent, getIndexies(conf, 5)));
     }
 
-    @Ignore @Test
+    @Test
     public void testUpdateContentConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterContent, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateContentConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterContent, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateContentConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterContent, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateLastModificationTimeConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateLastModificationTimeConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateLastModificationTimeConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateLastModificationTimeConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateContentAndLastModificationTimeConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
@@ -171,7 +158,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                         updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateContentAndLastModificationTimeConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
@@ -180,7 +166,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                         updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateContentAndLastModificationTimeConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
@@ -189,7 +174,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                         updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateContentAndLastModificationTimeConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
@@ -198,35 +182,30 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                         updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterPath, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterPath, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterPath, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterPath, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathAndContentAndLastModificationTimeConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
@@ -236,7 +215,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                 new IndexArchiveUpdater(updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathAndContentAndLastModificationTimeConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
@@ -246,7 +224,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                 new IndexArchiveUpdater(updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathAndContentAndLastModificationTimeConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
@@ -256,7 +233,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                 new IndexArchiveUpdater(updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathAndContentAndLastModificationTimeConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
@@ -266,7 +242,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                 new IndexArchiveUpdater(updaterLastModificationTime, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathAndContentAndLastModificationTimeSameIndexiesConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
@@ -277,7 +252,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                 new IndexArchiveUpdater(updaterLastModificationTime, indexies));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathAndContentAndLastModificationTimeSameIndexiesConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
@@ -288,7 +262,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                 new IndexArchiveUpdater(updaterLastModificationTime, indexies));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathAndContentAndLastModificationTimeSameIndexiesConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
@@ -299,7 +272,6 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                 new IndexArchiveUpdater(updaterLastModificationTime, indexies));
     }
 
-    @Ignore
     @Test
     public void testUpdatePathAndContentAndLastModificationTimeSameIndexiesConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
@@ -310,28 +282,24 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
                 new IndexArchiveUpdater(updaterLastModificationTime, indexies));
     }
 
-    @Ignore
     @Test
     public void testUpdateUserGroupConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterUserGroup, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateUserGroupConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterUserGroup, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateUserGroupConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterUserGroup, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testUpdateUserGroupConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
@@ -342,56 +310,48 @@ public abstract class UpdateMultipleFilesAbstractTest<T extends IOutItemBase> ex
     // Multiple files specific tests
     // ------------------------------------------------------------------------------------------
 
-    @Ignore
     @Test
     public void testAddNewItemConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterAddNewItem, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testAddNewItemConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterAddNewItem, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testAddNewItemConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterAddNewItem, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testAddNewItemConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(true, conf, new IndexArchiveUpdater(updaterAddNewItem, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testDeleteItemConfFlat() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterDeleteItem, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testDeleteItemConfFlatMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_FLAT;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterDeleteItem, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testDeleteItemConfDeep() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;
         testUpdate(false, conf, new IndexArchiveUpdater(updaterDeleteItem, getIndexies(conf, 5)));
     }
 
-    @Ignore
     @Test
     public void testDeleteItemConfDeepMultithreaded() throws Exception {
         DirectoryTreeConfiguration conf = CONF_DEEP;

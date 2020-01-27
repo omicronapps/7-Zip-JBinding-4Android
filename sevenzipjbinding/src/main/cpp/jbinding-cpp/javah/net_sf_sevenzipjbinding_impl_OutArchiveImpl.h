@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     net_sf_sevenzipjbinding_impl_OutArchiveImpl
+ * Method:    nativeSetHeaderEncryption
+ * Signature: (Z)V
+ */
+JNIEXPORT void JNICALL Java_net_sf_sevenzipjbinding_impl_OutArchiveImpl_nativeSetHeaderEncryption
+  (JNIEnv *, jobject, jboolean);
+
+/*
+ * Class:     net_sf_sevenzipjbinding_impl_OutArchiveImpl
  * Method:    nativeSetLevel
  * Signature: (I)V
  */

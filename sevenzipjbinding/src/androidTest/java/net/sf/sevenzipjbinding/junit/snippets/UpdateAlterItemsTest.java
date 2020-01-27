@@ -1,6 +1,6 @@
 package net.sf.sevenzipjbinding.junit.snippets;
 
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
+import net.sf.sevenzipjbinding.junit.TestBase;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,7 +15,7 @@ import org.junit.Test;
  * @since 9.20-2.00
  */
 public class UpdateAlterItemsTest extends SnippetTest {
-    private static final String SYSTEM_PROPERTY_TMP = JUnitTestBase.getTempDirName();
+    private static final String SYSTEM_PROPERTY_TMP = "java.io.tmpdir";
     /* BEGIN_OUTPUT(UpdateAlterItems) */
     String expected7z = "Update successful\n";
     /* END_OUTPUT */
@@ -28,11 +28,11 @@ public class UpdateAlterItemsTest extends SnippetTest {
 
     @Test
     public void testCompress7z() {
-        String tmpDir = SYSTEM_PROPERTY_TMP;
+        String tmpDir = TestBase.getTempDir();
         File archiveFile = new File(tmpDir, "updated-alter-items.7z");
 
         beginSnippetTest();
-        UpdateAlterItems.main(new String[] {JUnitTestBase.getFileNameFromAssets("testdata/snippets/to-update.7z"), archiveFile.getAbsolutePath() });
+        UpdateAlterItems.main(new String[] { TestBase.getFile("testdata/snippets/to-update.7z"), archiveFile.getAbsolutePath() });
         String output = endSnippetTest();
         assertEquals(getExpectedOutput(expected7z), output);
     }

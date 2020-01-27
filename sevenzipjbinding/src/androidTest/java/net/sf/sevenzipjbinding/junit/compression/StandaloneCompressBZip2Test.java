@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.junit.Test;
+
 import net.sf.sevenzipjbinding.ArchiveFormat;
 import net.sf.sevenzipjbinding.IInArchive;
 import net.sf.sevenzipjbinding.IOutCreateArchiveBZip2;
@@ -17,12 +19,11 @@ import net.sf.sevenzipjbinding.SevenZip;
 import net.sf.sevenzipjbinding.SevenZipException;
 import net.sf.sevenzipjbinding.impl.OutItemFactory;
 import net.sf.sevenzipjbinding.junit.JUnitNativeTestBase;
+import net.sf.sevenzipjbinding.junit.VoidContext;
 import net.sf.sevenzipjbinding.junit.tools.CallbackTester;
 import net.sf.sevenzipjbinding.junit.tools.VirtualContent;
 import net.sf.sevenzipjbinding.junit.tools.VirtualContent.VirtualContentConfiguration;
 import net.sf.sevenzipjbinding.util.ByteArrayStream;
-
-import org.junit.Test;
 
 
 /**
@@ -31,7 +32,7 @@ import org.junit.Test;
  * @author Boris Brodski
  * @since 9.20-2.00
  */
-public class StandaloneCompressBZip2Test extends JUnitNativeTestBase {
+public class StandaloneCompressBZip2Test extends JUnitNativeTestBase<VoidContext>{
     private class OutCreateArchiveBZip2 implements IOutCreateCallback<IOutItemBZip2> {
 
 
@@ -66,13 +67,13 @@ public class StandaloneCompressBZip2Test extends JUnitNativeTestBase {
     static final Date DATE = new Date();
 
     VirtualContent virtualContent;
-    CallbackTester<IOutItemBZip2> callbackTesterCreateArchive = new CallbackTester<IOutItemBZip2>(
+    CallbackTester<OutCreateArchiveBZip2> callbackTesterCreateArchive = new CallbackTester<OutCreateArchiveBZip2>(
             new OutCreateArchiveBZip2());
 
     @Test
     public void testCompressionBZip2() throws Exception {
         virtualContent = new VirtualContent(new VirtualContentConfiguration());
-        virtualContent.fillRandomly(1, 0, 0, 100, 50, null);
+        virtualContent.fillRandomly(1, 0, 0, 100, 50, null, false);
 
         ByteArrayStream byteArrayStream = new ByteArrayStream(1000000);
 

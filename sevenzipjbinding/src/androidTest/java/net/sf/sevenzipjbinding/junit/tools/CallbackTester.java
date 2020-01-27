@@ -1,36 +1,40 @@
 package net.sf.sevenzipjbinding.junit.tools;
 
-import net.sf.sevenzipjbinding.IOutCreateCallback;
-import net.sf.sevenzipjbinding.IOutItemBase;
-import net.sf.sevenzipjbinding.ISequentialInStream;
-import net.sf.sevenzipjbinding.SevenZipException;
-import net.sf.sevenzipjbinding.impl.OutItemFactory;
-
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 // TODO Test more callbacks (extraction + compression)
-public class CallbackTester<E extends IOutItemBase> implements IOutCreateCallback<E> {
+public class CallbackTester<E> implements InvocationHandler {
     private Set<String> methodNameSet = new HashSet<String>();
-    private IOutCreateCallback<E> instance;
+    private E proxyInstance;
+    private E instance;
 
     @SuppressWarnings("unchecked")
-    public CallbackTester(IOutCreateCallback instance) {
+    public CallbackTester(E instance) {
         this.instance = instance;
+
+        List<Class<?>> interfaceList = new ArrayList<Class<?>>();
+        Class<?> clazz = instance.getClass();
+        while (clazz != Object.class) {
+            interfaceList.addAll(Arrays.asList((Class<?>[]) clazz.getInterfaces()));
+            clazz = clazz.getSuperclass();
+        }
+
+        this.proxyInstance = (E) Proxy.newProxyInstance(instance.getClass().getClassLoader(),
+                interfaceList.toArray(new Class<?>[0]),
+                this);
     }
 
     public int getDifferentMethodsCalled() {
         return methodNameSet.size();
-    }
-
-    public IOutCreateCallback<E> getProxyInstance() {
-        return this;
-    }
-
-    public IOutCreateCallback<E> getOriginalCallback() {
-        return instance;
     }
 
     @Override
@@ -49,38 +53,22 @@ public class CallbackTester<E extends IOutItemBase> implements IOutCreateCallbac
         return "Called methods: " + stringBuilder;
     }
 
-    public void setTotal(long total) throws SevenZipException {
-        if (methodNameSet.add("setTotal")) {
-            // System.out.println("setTotal");
-        }
-        instance.setTotal(total);
+    public E getProxyInstance() {
+        return proxyInstance;
     }
 
-    public void setCompleted(long complete) throws SevenZipException {
-        if (methodNameSet.add("setCompleted")) {
-            // System.out.println("setCompleted");
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        if (methodNameSet.add(method.getName())) {
+            // System.out.println(method);
         }
-        instance.setCompleted(complete);
+        try {
+            return method.invoke(instance, args);
+        } catch (InvocationTargetException exception) {
+            throw exception.getCause();
+        }
     }
 
-    public void setOperationResult(boolean operationResultOk) throws SevenZipException {
-        if (methodNameSet.add("setOperationResult")) {
-            // System.out.println("setOperationResult");
-        }
-        instance.setOperationResult(operationResultOk);
-    }
-
-    public E getItemInformation(int index, OutItemFactory<E> outItemFactory) throws SevenZipException {
-        if (methodNameSet.add("getItemInformation")) {
-            // System.out.println("getItemInformation");
-        }
-        return instance.getItemInformation(index, outItemFactory);
-    }
-
-    public ISequentialInStream getStream(int index) throws SevenZipException {
-        if (methodNameSet.add("getStream")) {
-            // System.out.println("getStream");
-        }
-        return instance.getStream(index);
+    public E getOriginalCallback() {
+        return instance;
     }
 }

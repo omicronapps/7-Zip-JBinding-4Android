@@ -5,19 +5,19 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.jar.Manifest;
+
+import org.junit.Test;
 
 import net.sf.sevenzipjbinding.SevenZip;
 import net.sf.sevenzipjbinding.SevenZip.Version;
 import net.sf.sevenzipjbinding.junit.JUnitNativeTestBase;
+import net.sf.sevenzipjbinding.junit.VoidContext;
 
-import org.junit.Test;
-
-public class VersionTest extends JUnitNativeTestBase {
+public class VersionTest extends JUnitNativeTestBase<VoidContext> {
 
     @Test
     public void testSevenZipJBindingVersionSet() throws Exception {
@@ -39,7 +39,7 @@ public class VersionTest extends JUnitNativeTestBase {
     public void testSevenZipVersion() {
         Version version = SevenZip.getSevenZipVersion();
 
-        System.out.println("Testing binding of 7-Zip " + version.version + " (" + version.date + ")");
+        log("Testing binding of 7-Zip " + version.version + " (" + version.date + ")");
 
         assertEquals(0, version.build);
         assertTrue(version.major > 0);
@@ -50,14 +50,32 @@ public class VersionTest extends JUnitNativeTestBase {
     }
 
     private String getVersionFromJarMANIFEST() throws Exception {
-        byte[] buf = SevenZip.SEVENZIPJBINDING_MANIFEST_MF.getBytes();
-        InputStream is = new ByteArrayInputStream(buf);
-        Manifest manifest = new Manifest(is);
-        String title = manifest.getMainAttributes().getValue("Implementation-Title");
-        if (title != null && title.startsWith("7-Zip-JBinding native lib")) {
-            String version = manifest.getMainAttributes().getValue("Implementation-Version");
-            if (version != null) {
-                return version;
+        if (System.getProperty("java.vendor", "unknown").equals("The Android Project")) {
+            String[] mf = SevenZip.SEVENZIPJBINDING_MANIFEST_MF.split(System.getProperty("line.separator", "\\n"));
+            HashMap<String, String> attributes = new HashMap<>();
+            for (String attr : mf) {
+                int index = attr.indexOf(": ");
+                String key = attr.substring(0, index);
+                String value = attr.substring(index + 2);
+                attributes.put(key, value);
+            }
+            String title = attributes.get("Implementation-Title");
+            if (title != null && title.startsWith("7-Zip-JBinding native lib")) {
+                String version = attributes.get("Implementation-Version");
+                if (version != null) {
+                    return version;
+                }
+            }
+        }
+        Enumeration<URL> resources = getClass().getClassLoader().getResources("META-INF/MANIFEST.MF");
+        while (resources.hasMoreElements()) {
+            Manifest manifest = new Manifest(resources.nextElement().openStream());
+            String title = manifest.getMainAttributes().getValue("Implementation-Title");
+            if (title != null && title.startsWith("7-Zip-JBinding native lib")) {
+                String version = manifest.getMainAttributes().getValue("Implementation-Version");
+                if (version != null) {
+                    return version;
+                }
             }
         }
 

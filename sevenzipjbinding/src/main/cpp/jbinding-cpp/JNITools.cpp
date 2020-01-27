@@ -225,8 +225,7 @@ jobject DoubleToObject(JNIEnv * env, double value) {
 jobject BSTRToObject(JNIEnv * env, BSTR value) {
     localinit(env);
 
-    CMyComBSTR str(value);
-    return env->NewString(UnicodeHelper(str), str.Length());
+    return ToJChar(value).toNewString(env);
 }
 
 /**
@@ -262,8 +261,9 @@ bool ObjectToFILETIME(JNIEnvInstance & jniEnvInstance, jobject obj, FILETIME & f
  */
 jstring PropVariantToString(JNIEnv * env, PROPID propID, const PROPVARIANT &propVariant) {
 
-    UString string = ConvertPropertyToString(propVariant, propID, true);
-    return env->NewString(UnicodeHelper(string), string.Length());
+    UString string;
+    ConvertPropertyToString(string, propVariant, propID, true);
+    return ToJChar(string).toNewString(env);
 }
 
 void ObjectToPropVariant(JNIEnvInstance & jniEnvInstance, jobject object, PROPVARIANT * propVariant) {
@@ -275,16 +275,7 @@ void ObjectToPropVariant(JNIEnvInstance & jniEnvInstance, jobject object, PROPVA
             jint value = jniEnvInstance->CallIntMethod(object, g_IntegerIntValue);
             cPropVariant = (Int32) value;
         } else if (jniEnvInstance->IsInstanceOf(object, g_StringClass)) {
-            const jchar * jChars = jniEnvInstance->GetStringChars((jstring) object, NULL);
-            //			BSTR bstr;
-            //	        StringToBstr(UnicodeHelper(jChars), &bstr);
-            //			cPropVariant = bstr;
-#ifdef __ANDROID_API__
-            cPropVariant = UString(UnicodeHelper(jChars, jniEnvInstance->GetStringLength((jstring) object)));
-#else
-            cPropVariant = UString(UnicodeHelper(jChars));
-#endif
-            jniEnvInstance->ReleaseStringChars((jstring) object, jChars);
+            cPropVariant = UString(FromJChar(jniEnvInstance, (jstring)object));
         } else if (jniEnvInstance->IsInstanceOf(object, g_BooleanClass)) {
             jboolean value = jniEnvInstance->CallBooleanMethod(object, g_BooleanBooleanValue);
             cPropVariant = (bool) value;
@@ -329,6 +320,9 @@ jobject PropVariantToObject(JNIEnvInstance & jniEnvInstance, NWindows::NCOM::CPr
     case VT_I8:
         return LongToObject(jniEnvInstance, propVariant->hVal.QuadPart);
 
+    case VT_UI8:
+        return LongToObject(jniEnvInstance, propVariant->uhVal.QuadPart);
+
     case VT_UI1:
         return IntToObject(jniEnvInstance, propVariant->bVal);
 
@@ -338,9 +332,6 @@ jobject PropVariantToObject(JNIEnvInstance & jniEnvInstance, NWindows::NCOM::CPr
     case VT_UINT: // TODO Check this: Variant 'VT_UINT'
     case VT_UI4:
         return IntToObject(jniEnvInstance, propVariant->ulVal);
-
-    case VT_UI8:
-        return LongToObject(jniEnvInstance, propVariant->uhVal.QuadPart);
 
     case VT_BOOL:
         return BooleanToObject(jniEnvInstance, propVariant->boolVal);

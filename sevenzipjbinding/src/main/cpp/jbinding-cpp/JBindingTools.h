@@ -126,9 +126,9 @@ private:
 #endif
             jint result;
 #ifdef __ANDROID_API__
-                if ((result = _vm->AttachCurrentThread((JNIEnv**) &threadContext._env, NULL))
+            if ((result = _vm->AttachCurrentThread((JNIEnv**) &threadContext._env, NULL))
 #else
-                if ((result = _vm->AttachCurrentThread((void**) &threadContext._env, NULL))
+            if ((result = _vm->AttachCurrentThread((void**) &threadContext._env, NULL))
 #endif
                     || threadContext._env == NULL) {
                 TRACE("New thread couldn't be attached: " << result)

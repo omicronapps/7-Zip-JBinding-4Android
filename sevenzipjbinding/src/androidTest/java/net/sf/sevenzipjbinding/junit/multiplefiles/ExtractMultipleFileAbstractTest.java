@@ -8,9 +8,10 @@ import java.util.zip.ZipFile;
 
 import net.sf.sevenzipjbinding.ArchiveFormat;
 import net.sf.sevenzipjbinding.IInArchive;
+import net.sf.sevenzipjbinding.PropID;
+import net.sf.sevenzipjbinding.SevenZipException;
 import net.sf.sevenzipjbinding.junit.ExtractFileAbstractTest;
-import net.sf.sevenzipjbinding.junit.JUnitNativeTestBase;
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
+import net.sf.sevenzipjbinding.junit.TestBase;
 import net.sf.sevenzipjbinding.junit.tools.ZipContentComparator;
 
 /**
@@ -85,47 +86,68 @@ public abstract class ExtractMultipleFileAbstractTest extends ExtractFileAbstrac
 	protected void doTestArchiveExtraction(int fileIndex, int compressionIndex, boolean autodetectFormat)
 			throws Exception {
 		String sollArchiveFilename = "archive" + fileIndex + ".zip";
-		String sollFullFilename = JUnitNativeTestBase.getFileNameFromAssets(MULTIPLE_FILES_TEST_DATA_PATH + File.separatorChar + sollArchiveFilename);
+		String sollFullFilename = TestBase.getFile(MULTIPLE_FILES_TEST_DATA_PATH + File.separatorChar + sollArchiveFilename);
 
 		ExtractionInArchiveTestHelper extractionInArchiveTestHelper = new ExtractionInArchiveTestHelper();
+		closeLater(extractionInArchiveTestHelper);
 		IInArchive inArchive = extractionInArchiveTestHelper.openArchiveFileWithSevenZip(fileIndex,
 				compressionIndex, autodetectFormat, "archive", "zip");
+        closeLater(inArchive);
 
         checkArchiveGeneric(inArchive);
 
-		ZipFile zipFile = null;
-		try {
-			zipFile = new ZipFile(sollFullFilename);
+        ZipFile zipFile = null;
+        boolean ok = false;
+        try {
+            zipFile = new ZipFile(new File(sollFullFilename));
 			assertTrue(inArchive.getNumberOfItems() > 0);
 
 			ZipContentComparator zipContentComparator1 = new ZipContentComparator(archiveFormat, inArchive, zipFile,
-					false, usingPassword ? passwordToUse : null, exceptionToBeExpected != null);
-            if (archiveFormat == ArchiveFormat.WIM) {
-                zipContentComparator1.addToIgnoreList("1.xml");
-            }
+                    false, context().usingPassword ? context().passwordToUse : null,
+                    context().exceptionToBeExpected != null);
+            addFilesToIgnore(inArchive, zipContentComparator1);
 			assertTrue(zipContentComparator1.getErrorMessage(), zipContentComparator1.isEqual());
 
 			ZipContentComparator zipContentComparator2 = new ZipContentComparator(archiveFormat, inArchive, zipFile,
-					true, usingPassword ? passwordToUse : null, exceptionToBeExpected != null);
+                    true, context().usingPassword ? context().passwordToUse : null,
+                    context().exceptionToBeExpected != null);
+            addFilesToIgnore(inArchive, zipContentComparator2);
 
             if (archiveFormat == ArchiveFormat.WIM) {
                 zipContentComparator2.addToIgnoreList("1.xml");
             }
 
             assertTrue(zipContentComparator2.getErrorMessage(), zipContentComparator2.isEqual());
-		} catch (IOException exception) {
-			throw new RuntimeException(exception);
-		} finally {
-			inArchive.close();
-			if (zipFile != null) {
-				try {
-					zipFile.close();
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
-			}
-
-			extractionInArchiveTestHelper.closeAllStreams();
-		}
+            ok = true;
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        } finally {
+            if (zipFile != null) {
+                try {
+                    zipFile.close();
+                } catch (IOException e) {
+                    if (ok) {
+                        throw new RuntimeException(e);
+                    }
+                    log(e, "Error closing zip file");
+                }
+            }
+        }
 	}
+
+    private void addFilesToIgnore(IInArchive inArchive, ZipContentComparator zipContentComparator1)
+            throws SevenZipException {
+        if (archiveFormat == ArchiveFormat.WIM) {
+            zipContentComparator1.addToIgnoreList("1.xml");
+        }
+        if (archiveFormat == ArchiveFormat.NTFS) {
+            int numberOfItems = inArchive.getNumberOfItems();
+            for (int i = 0; i < numberOfItems; i++) {
+                String path = (String) inArchive.getProperty(i, PropID.PATH);
+                if (path.startsWith("[SYSTEM]")) {
+                    zipContentComparator1.addToIgnoreList(path);
+                }
+            }
+        }
+    }
 }

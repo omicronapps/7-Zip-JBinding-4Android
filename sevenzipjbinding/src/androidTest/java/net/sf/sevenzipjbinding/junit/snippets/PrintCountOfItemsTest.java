@@ -1,6 +1,6 @@
 package net.sf.sevenzipjbinding.junit.snippets;
 
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
+import net.sf.sevenzipjbinding.junit.TestBase;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +23,7 @@ public class PrintCountOfItemsTest extends SnippetTest {
         expected = expected.replace("\n", NEW_LINE);
 
         beginSnippetTest();
-        PrintCountOfItems.main(new String[] {JUnitTestBase.getFileNameFromAssets("testdata/snippets/simple.zip") });
+        PrintCountOfItems.main(new String[] { TestBase.getFile("testdata/snippets/simple.zip") });
         String output = endSnippetTest();
         assertEquals(expected, output);
     }

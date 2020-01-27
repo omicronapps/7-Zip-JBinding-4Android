@@ -8,21 +8,26 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 
-import net.sf.sevenzipjbinding.SevenZip;
-import net.sf.sevenzipjbinding.SevenZipNativeInitializationException;
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
-
 import org.junit.Test;
 
+import net.sf.sevenzipjbinding.SevenZip;
+import net.sf.sevenzipjbinding.SevenZipNativeInitializationException;
+import net.sf.sevenzipjbinding.junit.TestBase;
+
 /**
- * Tests, that 7-Zip-JBinding initialization procedure doesn't verify or overwrite temporary artifacts.
+ * Tests, that 7-Zip-JBinding initialization procedure doesn't verify or overwrite temporary artifacts. This test
+ * contains two phases and should be started with:
+ * <ul>
+ * <li>-Dsevenziptest.standard_initialization_test_phase=1
+ * <li>-Dsevenziptest.standard_initialization_test_phase=2
+ * </ul>
  *
  * @author Boris Brodski
  * @since 4.65-1
  */
 public class InitializationDoesNotVerifyArtifactsTest {
     private static final String SYSTEM_PROPERTY_PHASE = "sevenziptest.standard_initialization_test_phase";
-    private static final String TEMP_DIR = JUnitTestBase.getTempDirName();
+    private static final String TEMP_DIR = TestBase.getTempDir();
 
     @Test
     public void test() throws Exception {

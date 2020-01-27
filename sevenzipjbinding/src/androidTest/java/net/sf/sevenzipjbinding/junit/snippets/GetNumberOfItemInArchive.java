@@ -4,18 +4,18 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.RandomAccessFile;
 
+import org.junit.Test;
+
 import net.sf.sevenzipjbinding.ArchiveFormat;
 import net.sf.sevenzipjbinding.IInArchive;
 import net.sf.sevenzipjbinding.SevenZip;
 import net.sf.sevenzipjbinding.impl.RandomAccessFileInStream;
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
-
-import org.junit.Test;
+import net.sf.sevenzipjbinding.junit.TestBase;
 
 public class GetNumberOfItemInArchive {
     @Test
     public void snippetRunner() throws Exception {
-        assertEquals(4, getNumberOfItemsInArchive(JUnitTestBase.getFileNameFromAssets("testdata/snippets/simple.zip")));
+        assertEquals(4, getNumberOfItemsInArchive(TestBase.getFile("testdata/snippets/simple.zip")));
     }
 
     /* BEGIN_SNIPPET(GetNumberOfItemsInArchive) */
@@ -26,8 +26,7 @@ public class GetNumberOfItemInArchive {
         randomAccessFile = new RandomAccessFile(archiveFile, "r");
 
         archive = SevenZip.openInArchive(ArchiveFormat.ZIP, // null - autodetect
-                new RandomAccessFileInStream(//
-                        randomAccessFile));
+                new RandomAccessFileInStream(randomAccessFile));
 
         int numberOfItems = archive.getNumberOfItems();
 

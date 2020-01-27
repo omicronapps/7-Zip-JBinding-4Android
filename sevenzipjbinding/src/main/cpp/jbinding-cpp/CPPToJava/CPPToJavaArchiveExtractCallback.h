@@ -46,7 +46,7 @@ public:
         }
     }
 
-    STDMETHOD(QueryInterface)(REFGUID refguid, void ** p) {
+    STDMETHOD(QueryInterface)(REFGUID refguid, void ** p) throw() {
         TRACE_OBJECT_CALL("QueryInterface");
 
         if (refguid == IID_ICryptoGetTextPassword && _cryptoGetTextPasswordImpl) {
@@ -58,7 +58,7 @@ public:
         return CPPToJavaProgress::QueryInterface(refguid, p);
     }
 
-    STDMETHOD_(ULONG, AddRef)() {
+    STDMETHOD_(ULONG, AddRef)() throw() {
         TRACE_OBJECT_CALL("AddRef");
         return CPPToJavaProgress::AddRef();
     }

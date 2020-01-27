@@ -1,6 +1,6 @@
 package net.sf.sevenzipjbinding.junit.snippets;
 
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
+import net.sf.sevenzipjbinding.junit.TestBase;
 
 import static org.junit.Assert.assertEquals;
 
@@ -35,7 +35,7 @@ public class ListItemsTest extends SnippetTest {
         String expected = getExpectedOutput();
 
         beginSnippetTest();
-        ListItemsStandard.main(new String[] { JUnitTestBase.getFileNameFromAssets("testdata/snippets/simple.zip") });
+        ListItemsStandard.main(new String[] { TestBase.getFile("testdata/snippets/simple.zip") });
         String output = endSnippetTest();
         assertEquals(expected, output);
     }
@@ -45,7 +45,7 @@ public class ListItemsTest extends SnippetTest {
         String expected = getExpectedOutput();
 
         beginSnippetTest();
-        ListItemsStandard.main(new String[] { JUnitTestBase.getFileNameFromAssets("testdata/snippets/simple.zip") });
+        ListItemsStandard.main(new String[] { TestBase.getFile("testdata/snippets/simple.zip") });
         String output = endSnippetTest();
         assertEquals(expected, output);
     }

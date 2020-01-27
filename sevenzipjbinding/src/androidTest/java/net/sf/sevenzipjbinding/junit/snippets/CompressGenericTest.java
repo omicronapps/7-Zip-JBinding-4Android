@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 
 import net.sf.sevenzipjbinding.ArchiveFormat;
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
+import net.sf.sevenzipjbinding.junit.TestBase;
 
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ import org.junit.Test;
  * @since 9.20-2.00
  */
 public class CompressGenericTest extends SnippetTest {
-    private static final String SYSTEM_PROPERTY_TMP = JUnitTestBase.getTempDirName();
+    private static final String SYSTEM_PROPERTY_TMP = "java.io.tmpdir";
     /* BEGIN_OUTPUT(CompressGenericNoParameter) */
     String expectedNoParameter = "Usage: java CompressGeneric <archive-format> <archive> <count-of-files>\n" //
             + "Supported formats: ZIP\n" //
@@ -65,7 +65,7 @@ public class CompressGenericTest extends SnippetTest {
     @Test
     public void testCompress7z() {
 
-        String tmpDir = SYSTEM_PROPERTY_TMP;
+        String tmpDir = TestBase.getTempDir();
         File archiveFile = new File(tmpDir, "compressed-generic.7z");
 
         beginSnippetTest();
@@ -78,7 +78,7 @@ public class CompressGenericTest extends SnippetTest {
     @Test
     public void testCompressZip() {
 
-        String tmpDir = SYSTEM_PROPERTY_TMP;
+        String tmpDir = TestBase.getTempDir();
         File archiveFile = new File(tmpDir, "compressed-generic.zip");
 
         beginSnippetTest();
@@ -91,7 +91,7 @@ public class CompressGenericTest extends SnippetTest {
     @Test
     public void testCompressTar() {
 
-        String tmpDir = SYSTEM_PROPERTY_TMP;
+        String tmpDir = TestBase.getTempDir();
         File archiveFile = new File(tmpDir, "compressed-generic.tar");
 
         beginSnippetTest();
@@ -104,7 +104,7 @@ public class CompressGenericTest extends SnippetTest {
     @Test
     public void testCompressGZip() {
 
-        String tmpDir = SYSTEM_PROPERTY_TMP;
+        String tmpDir = TestBase.getTempDir();
         File archiveFile = new File(tmpDir, "compressed-generic.gz");
 
         beginSnippetTest();
@@ -116,7 +116,7 @@ public class CompressGenericTest extends SnippetTest {
     @Test
     public void testCompressBZip2() {
 
-        String tmpDir = SYSTEM_PROPERTY_TMP;
+        String tmpDir = TestBase.getTempDir();
         File archiveFile = new File(tmpDir, "compressed-generic.bz2");
 
         beginSnippetTest();

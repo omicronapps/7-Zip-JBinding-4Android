@@ -9,6 +9,10 @@
 
 #include "JBindingTools.h"
 
+#ifdef __ANDROID_API__
+#include "JavaStatInfos/JavaPackageSevenZip.h"
+#endif
+
 JT_BEGIN_CLASS("net/sf/sevenzipjbinding", SevenZipException)
 /*    */JT_CLASS_VIRTUAL_METHOD_OBJECT("Ljava/lang/Throwable;", initCause, JT_THROWABLE(cause,_))
 /*    */JT_CLASS_CONSTRUCTOR(JT_STRING(message, _))
@@ -61,6 +65,29 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *pjvm, void *reserved) {
         JBindingSession::_classLoaderObjects.insert(std::make_pair(EXTRACTASKMODE_CLASS, addClassLoaderObject(env, EXTRACTASKMODE_CLASS)));
         JBindingSession::_classLoaderObjects.insert(std::make_pair(EXTRACTOPERATIONRESULT_CLASS, addClassLoaderObject(env, EXTRACTOPERATIONRESULT_CLASS)));
 
+//        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_PROP_ID, addClassLoaderObject(env, JAVA_PROP_ID)));
+//        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_EXTRACT_ASK_MODE, addClassLoaderObject(env, JAVA_EXTRACT_ASK_MODE)));
+//        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_EXTRACT_OPERATION_RESULT, addClassLoaderObject(env, JAVA_EXTRACT_OPERATION_RESULT)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_IIN_ARCHIVE, addClassLoaderObject(env, JAVA_IIN_ARCHIVE)));
+//        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_IIN_STREAM, addClassLoaderObject(env, JAVA_IIN_STREAM)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_ISEQUENTIAL_IN_STREAM, addClassLoaderObject(env, JAVA_ISEQUENTIAL_IN_STREAM)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_ISEQUENTIAL_OUT_STREAM, addClassLoaderObject(env, JAVA_ISEQUENTIAL_OUT_STREAM)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_IOUT_ARCHIVE, addClassLoaderObject(env, JAVA_IOUT_ARCHIVE)));
+//        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_IOUT_ITEM_CALLBACK_BASE, addClassLoaderObject(env, JAVA_IOUT_ITEM_CALLBACK_BASE)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_ARCHIVE_FORMAT, addClassLoaderObject(env, JAVA_ARCHIVE_FORMAT)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_OUT_ITEM_FACTORY, addClassLoaderObject(env, JAVA_OUT_ITEM_FACTORY)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_OUT_ITEM, addClassLoaderObject(env, JAVA_OUT_ITEM)));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_IOUT_ITEM_BASE, addClassLoaderObject(env, JAVA_IOUT_ITEM_BASE)));
+
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEVEN_ZIP_PACKAGE"/IArchiveOpenCallback", addClassLoaderObject(env, SEVEN_ZIP_PACKAGE"/IArchiveOpenCallback")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEVEN_ZIP_PACKAGE"/IProgress", addClassLoaderObject(env, SEVEN_ZIP_PACKAGE"/IProgress")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEVEN_ZIP_PACKAGE"/IArchiveExtractCallback", addClassLoaderObject(env, SEVEN_ZIP_PACKAGE"/IArchiveExtractCallback")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEVEN_ZIP_PACKAGE"/IOutStream", addClassLoaderObject(env, SEVEN_ZIP_PACKAGE"/IOutStream")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEVEN_ZIP_PACKAGE"/ISeekableStream", addClassLoaderObject(env, SEVEN_ZIP_PACKAGE"/ISeekableStream")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEVEN_ZIP_PACKAGE"/IOutCreateCallback", addClassLoaderObject(env, SEVEN_ZIP_PACKAGE"/IOutCreateCallback")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEVEN_ZIP_PACKAGE_IMPL"/InArchiveImpl", addClassLoaderObject(env, SEVEN_ZIP_PACKAGE_IMPL"/InArchiveImpl")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair(SEVEN_ZIP_PACKAGE_IMPL"/OutArchiveImpl", addClassLoaderObject(env, SEVEN_ZIP_PACKAGE_IMPL"/OutArchiveImpl")));
+
         JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_OBJECT, addClassLoaderObject(env, JAVA_OBJECT)));
         JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_BYTE, addClassLoaderObject(env, JAVA_BYTE)));
         JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_CHARACTER, addClassLoaderObject(env, JAVA_CHARACTER)));
@@ -74,6 +101,17 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *pjvm, void *reserved) {
         JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_STRING, addClassLoaderObject(env, JAVA_STRING)));
         JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_THROWABLE, addClassLoaderObject(env, JAVA_THROWABLE)));
         JBindingSession::_classLoaderObjects.insert(std::make_pair(JAVA_DATE, addClassLoaderObject(env, JAVA_DATE)));
+
+#ifdef NATIVE_JUNIT_TEST_SUPPORT
+        JBindingSession::_classLoaderObjects.insert(std::make_pair("net/sf/sevenzipjbinding/junit/jbindingtools/Callback1", addClassLoaderObject(env, "net/sf/sevenzipjbinding/junit/jbindingtools/Callback1")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair("net/sf/sevenzipjbinding/junit/jbindingtools/JBindingTest", addClassLoaderObject(env, "net/sf/sevenzipjbinding/junit/jbindingtools/JBindingTest")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair("net/sf/sevenzipjbinding/junit/jbindingtools/ExceptionHandlingTest", addClassLoaderObject(env, "net/sf/sevenzipjbinding/junit/jbindingtools/ExceptionHandlingTest")));
+
+        JBindingSession::_classLoaderObjects.insert(std::make_pair("net/sf/sevenzipjbinding/junit/jnitools/JTestAbstractClass", addClassLoaderObject(env, "net/sf/sevenzipjbinding/junit/jnitools/JTestAbstractClass")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair("net/sf/sevenzipjbinding/junit/jnitools/JTestFinalClass", addClassLoaderObject(env, "net/sf/sevenzipjbinding/junit/jnitools/JTestFinalClass")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair("net/sf/sevenzipjbinding/junit/jnitools/Interface1", addClassLoaderObject(env, "net/sf/sevenzipjbinding/junit/jnitools/Interface1")));
+        JBindingSession::_classLoaderObjects.insert(std::make_pair("net/sf/sevenzipjbinding/junit/jnitools/ParamSpecTest", addClassLoaderObject(env, "net/sf/sevenzipjbinding/junit/jnitools/ParamSpecTest")));
+#endif
     }
     return JNI_VERSION_1_6;
 }

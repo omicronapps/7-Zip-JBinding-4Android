@@ -1,6 +1,6 @@
 package net.sf.sevenzipjbinding.junit.snippets;
 
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
+import net.sf.sevenzipjbinding.junit.TestBase;
 
 import static org.junit.Assert.assertEquals;
 
@@ -15,7 +15,7 @@ import org.junit.Test;
  * @since 9.20-2.00
  */
 public class CompressNonGenericGZipTest extends SnippetTest {
-    private static final String SYSTEM_PROPERTY_TMP = JUnitTestBase.getTempDirName();
+    private static final String SYSTEM_PROPERTY_TMP = "java.io.tmpdir";
 
     private String getExpectedOutput() {
         /* BEGIN_OUTPUT(CompressNonGenericGZip) */
@@ -29,7 +29,7 @@ public class CompressNonGenericGZipTest extends SnippetTest {
 
     @Test
     public void testCompress() {
-        String tmpDir = SYSTEM_PROPERTY_TMP;
+        String tmpDir = TestBase.getTempDir();
         File archiveFile = new File(tmpDir, "compressed.gz");
 
         beginSnippetTest();

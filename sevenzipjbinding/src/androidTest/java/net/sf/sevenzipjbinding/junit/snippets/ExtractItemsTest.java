@@ -1,6 +1,6 @@
 package net.sf.sevenzipjbinding.junit.snippets;
 
-import net.sf.sevenzipjbinding.junit.JUnitTestBase;
+import net.sf.sevenzipjbinding.junit.TestBase;
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,7 +34,7 @@ public class ExtractItemsTest extends SnippetTest {
         String expected = getExpectedOutput();
 
         beginSnippetTest();
-        ExtractItemsSimple.main(new String[] { JUnitTestBase.getFileNameFromAssets("testdata/snippets/simple.zip") });
+        ExtractItemsSimple.main(new String[] { TestBase.getFile("testdata/snippets/simple.zip") });
         String output = endSnippetTest();
         assertEquals(expected, output);
     }
@@ -44,7 +44,7 @@ public class ExtractItemsTest extends SnippetTest {
         String expected = getExpectedOutput();
 
         beginSnippetTest();
-        ExtractItemsStandard.main(new String[] { JUnitTestBase.getFileNameFromAssets("testdata/snippets/simple.zip") });
+        ExtractItemsStandard.main(new String[] { TestBase.getFile("testdata/snippets/simple.zip") });
         String output = endSnippetTest();
         assertEquals(expected, output);
     }
@@ -54,7 +54,7 @@ public class ExtractItemsTest extends SnippetTest {
         String expected = getExpectedOutput();
 
         beginSnippetTest();
-        ExtractItemsStandardCallback.main(new String[] { JUnitTestBase.getFileNameFromAssets("testdata/snippets/simple.zip") });
+        ExtractItemsStandardCallback.main(new String[] { TestBase.getFile("testdata/snippets/simple.zip") });
         String output = endSnippetTest();
         assertEquals(expected, output);
     }

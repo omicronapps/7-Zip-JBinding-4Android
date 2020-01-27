@@ -4,7 +4,7 @@
 ## Summary
 Android library version of [7-Zip-JBinding](http://sevenzipjbind.sourceforge.net/) java wrapper.
 
-Native (JNI) cross-platform library to extract (password protected, multi-part) 7z Zip Rar Tar Split Lzma Iso HFS GZip Cpio BZip2 Z Arj Chm Lhz Cab Nsis Deb Rpm Wim Udf archives and create 7z, Zip, Tar, GZip & BZip2 from Java on Android.
+Native (JNI) cross-platform library to extract (password protected, multi-part) 7z Arj BZip2 Cab Chm Cpio Deb GZip HFS Iso Lzh Lzma Nsis Rar Rpm Split Tar Udf Wim Xar Z Zip archives and create 7z, Zip, Tar, GZip & BZip2 from Java on Android.
 
 ### Features
 All features of [7-Zip-JBinding](http://sevenzipjbind.sourceforge.net/) supported:
@@ -13,7 +13,7 @@ All features of [7-Zip-JBinding](http://sevenzipjbind.sourceforge.net/) supporte
 - Extract password protected archives
 - Extract splitted into volumes archives
 - Extract multiple archives multithreaded
-- 6766 JUnit tests
+- 8499 JUnit tests
 - Cross-platform
 
 ## Authors
@@ -310,6 +310,27 @@ public class TestSlowExtract {
 ```
 
 ## Release Notes
+Main features of 16.02-2.01beta (Release candidate, extraction/compression/update, cross-platform, based on zip/p7zip 16.02)
+* Bind 7-Zip 16.02 (beta), In-memory archive extraction/creation/update
+* Extraction of
+  - 7z, Arj, BZip2, Cab, Chm, Cpio, Ar/A/Lib/Deb, Fat, GZip, Iso,
+    Lzh, Lzma, Nsis, Ntfs, Rar, Rpm, Split, Tar, Wim, Xar, Z, Zip
+  - HFS, Udf removed
+    (Temporary removed due to a security issue in 7-zip prior to 16.x)
+  - Archive format auto detection
+  - Support for password protected and in volumes splitted archives
+  - Full featured and simplified extraction interfaces
+* Compression & update of
+  - 7z, Zip, Tar, GZip, BZip2
+  - Convenient archive format specific and generic compression APIs
+  - Password protected archives (7z, zip) with encrypted archive headers (7z only)
+* JavaDoc + Snippets (see documentation on the web: sevenzipjbind.sf.net)
+* Over 8499 JUnit tests:
+  - Initialization
+  - All extraction methods
+  - Compression
+  - Unicode support
+
 Main features of 9.20-2.00beta (Release candidate, extraction/compression/update, cross-platform, based on zip/p7zip 9.20)
 * Extraction of
   - 7z, Arj, BZip2, Cab, Chm, Cpio, Deb, GZip, HFS, Iso, Lzh,

@@ -15,8 +15,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
-import org.junit.Test;
-
 import net.sf.sevenzipjbinding.ArchiveFormat;
 import net.sf.sevenzipjbinding.ExtractOperationResult;
 import net.sf.sevenzipjbinding.IInArchive;
@@ -27,6 +25,8 @@ import net.sf.sevenzipjbinding.junit.ExtractFileAbstractTest;
 import net.sf.sevenzipjbinding.junit.TestBase;
 import net.sf.sevenzipjbinding.junit.junittools.annotations.Multithreaded;
 import net.sf.sevenzipjbinding.junit.junittools.annotations.Repeat;
+
+import org.junit.Test;
 
 /**
  * This test tests extraction of archives with a single file. Test data: <code>testdata/simple</code>.<br>
@@ -229,9 +229,8 @@ public abstract class ExtractSingleFileAbstractTest extends ExtractFileAbstractT
         checkArchiveGeneric(inArchive);
         outputStream.check();
 
-        // TODO Uncomment after resolving security problems in 7-zip
         if (archiveFormat != ArchiveFormat.CAB && archiveFormat != ArchiveFormat.CHM
-        /* && archiveFormat != ArchiveFormat.UDF */) {
+                    && archiveFormat != ArchiveFormat.UDF) {
             checkPropertyPackedSize(inArchive, index, expectedFilename);
         }
         checkPropertyIsEncrypted(inArchive, index, expectedFilename);

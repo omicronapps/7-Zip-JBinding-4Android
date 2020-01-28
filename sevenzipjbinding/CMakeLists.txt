@@ -49,6 +49,7 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/Common/CRC.cpp
         ${SEVEN_ZIP_SRC}/CPP/Common/IntToString.cpp
         ${SEVEN_ZIP_SRC}/CPP/Common/ListFileUtils.cpp
+        #${SEVEN_ZIP_SRC}/CPP/Common/StdInStream.cpp TODO check on Linux, remove it not needed
         ${SEVEN_ZIP_SRC}/CPP/Common/MyString.cpp
         ${SEVEN_ZIP_SRC}/CPP/Common/MyWindows.cpp
         ${SEVEN_ZIP_SRC}/CPP/Common/StringConvert.cpp
@@ -58,6 +59,7 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/Common/MyMap.cpp
         ${SEVEN_ZIP_SRC}/CPP/Common/MyXml.cpp
         ${SEVEN_ZIP_SRC}/CPP/Common/Wildcard.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/Windows/FileDir.cpp
         ${SEVEN_ZIP_SRC}/CPP/Windows/FileFind.cpp
         ${SEVEN_ZIP_SRC}/CPP/Windows/FileIO.cpp
@@ -68,6 +70,7 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/Windows/Synchronization.cpp
         ${SEVEN_ZIP_SRC}/CPP/Windows/System.cpp
         ${SEVEN_ZIP_SRC}/CPP/Windows/TimeUtils.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Common/CreateCoder.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Common/CWrappers.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Common/FilePathAutoRename.cpp
@@ -90,6 +93,7 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/7zip/Common/StreamUtils.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Common/UniqBlocks.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Common/VirtThread.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/UI/Common/LoadCodecs.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/UI/Common/PropIDUtils.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/UI/Console/ConsoleClose.cpp
@@ -104,7 +108,9 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/PpmdHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/SplitHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/XzHandler.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Common/CoderMixer2.cpp
+        #${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Common/CrossThreadProgress.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Common/DummyOutStream.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Common/FindSignature.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Common/HandlerOut.cpp
@@ -114,11 +120,13 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Common/OutStreamWithCRC.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Common/OutStreamWithSha1.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Common/ParseProperties.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zCompressionMode.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zDecode.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zEncode.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zExtract.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zFolderInStream.cpp
+        #${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zFolderOutStream.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zHandlerOut.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zHeader.cpp
@@ -128,35 +136,55 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zSpecStream.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zUpdate.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/7z/7zRegister.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Cab/CabBlockInStream.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Cab/CabHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Cab/CabHeader.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Cab/CabIn.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Cab/CabRegister.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/LzhHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Compress/LzhDecoder.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Compress/LzmsDecoder.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Chm/ChmHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Chm/ChmIn.cpp
+
+        ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Udf/UdfHandler.cpp
+        ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Udf/UdfIn.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Wim/WimHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Wim/WimHandlerOut.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Wim/WimIn.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Wim/WimRegister.cpp
+
+        # Com ??
+
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/ArHandler.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/RpmHandler.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/XarHandler.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/ArjHandler.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/CpioHandler.cpp
+
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Iso/IsoHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Iso/IsoHeader.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Iso/IsoIn.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Iso/IsoRegister.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Nsis/NsisDecode.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Nsis/NsisHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Nsis/NsisIn.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Nsis/NsisRegister.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Rar/RarHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Rar/Rar5Handler.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Tar/TarHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Tar/TarHandlerOut.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Tar/TarHeader.cpp
@@ -164,6 +192,11 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Tar/TarOut.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Tar/TarRegister.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Tar/TarUpdate.cpp
+
+        # Udf
+
+        # Wim
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Zip/ZipAddCommon.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Zip/ZipHandler.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Zip/ZipHandlerOut.cpp
@@ -172,6 +205,7 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Zip/ZipOut.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Zip/ZipUpdate.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Archive/Zip/ZipRegister.cpp
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Compress/Bcj2Coder.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Compress/Bcj2Register.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Compress/BcjCoder.cpp
@@ -216,6 +250,8 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/CPP/7zip/Compress/ZDecoder.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Compress/XpressDecoder.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Compress/ZlibDecoder.cpp
+
+
         ${SEVEN_ZIP_SRC}/CPP/7zip/Crypto/7zAes.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Crypto/7zAesRegister.cpp
         ${SEVEN_ZIP_SRC}/CPP/7zip/Crypto/HmacSha1.cpp
@@ -250,6 +286,7 @@ set(SEVEN_ZIP_SOURCE_FILES
         ${SEVEN_ZIP_SRC}/C/Sha256.c
         ${SEVEN_ZIP_SRC}/C/7zCrc.c
         ${SEVEN_ZIP_SRC}/C/7zCrcOpt.c
+
         ${SEVEN_ZIP_SRC}/C/7zStream.c
         ${SEVEN_ZIP_SRC}/C/Delta.c
         ${SEVEN_ZIP_SRC}/C/Lzma2Dec.c

@@ -313,10 +313,8 @@ public class TestSlowExtract {
 Main features of 16.02-2.01 (Release, extraction/compression/update, cross-platform, based on zip/p7zip 16.02)
 * Bind 7-Zip 16.02 (beta), In-memory archive extraction/creation/update
 * Extraction of
-  - 7z, Arj, BZip2, Cab, Chm, Cpio, Ar/A/Lib/Deb, Fat, GZip, Iso,
-    Lzh, Lzma, Nsis, Ntfs, Rar, Rpm, Split, Tar, Wim, Xar, Z, Zip
-  - HFS, Udf removed
-    (Temporary removed due to a security issue in 7-zip prior to 16.x)
+  - 7z, Arj, BZip2, Cab, Chm, Cpio, Ar/A/Lib/Deb, Fat, GZip, HFS, Iso,
+    Lzh, Lzma, Nsis, Ntfs, Rar, Rpm, Split, Tar, Udf, Wim, Xar, Z, Zip
   - Archive format auto detection
   - Support for password protected and in volumes splitted archives
   - Full featured and simplified extraction interfaces

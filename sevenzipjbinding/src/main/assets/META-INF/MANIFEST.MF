@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Vendor: sevenzipjbind.sf.net
 Implementation-Title: 7-Zip-JBinding native lib (Linux-arm)
-Implementation-Version: 16.02-2.01beta
+Implementation-Version: 16.02-2.01
 Built-By: Boris Brodski
 CMake: 3.3.2
 Created-By: 1.6.0_33-b03 (Sun Microsystems Inc.)
-Built-Date: 2019-11-24 11:12:00Z
+Built-Date: 2020-01-20 21:44:51Z
 

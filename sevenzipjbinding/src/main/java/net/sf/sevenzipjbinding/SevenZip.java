@@ -193,7 +193,7 @@ public class SevenZip {
     }
 
     // Also change in /CMakeLists.txt
-    private static final String SEVENZIPJBINDING_VERSION = "16.02-2.01beta";
+    private static final String SEVENZIPJBINDING_VERSION = "16.02-2.01";
 
     private static final String SYSTEM_PROPERTY_TMP = "java.io.tmpdir";
     private static final String SYSTEM_PROPERTY_SEVEN_ZIP_NO_DO_PRIVILEGED_INITIALIZATION = "sevenzip.no_doprivileged_initialization";
@@ -212,11 +212,11 @@ public class SevenZip {
                     "Manifest-Version: 1.0\n" +
                     "Implementation-Vendor: sevenzipjbind.sf.net\n" +
                     "Implementation-Title: 7-Zip-JBinding native lib (Linux-arm)\n" +
-                    "Implementation-Version: 16.02-2.01beta\n" +
+                    "Implementation-Version: 16.02-2.01\n" +
                     "Built-By: Boris Brodski\n" +
                     "CMake: 3.3.2\n" +
                     "Created-By: 1.6.0_33-b03 (Sun Microsystems Inc.)\n" +
-                    "Built-Date: 2019-11-24 11:12:00Z\n";
+                    "Built-Date: 2020-01-20 21:44:51Z\n";
 
     private static boolean autoInitializationWillOccur = true;
     private static boolean initializationSuccessful = false;

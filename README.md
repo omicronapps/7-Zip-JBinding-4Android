@@ -13,7 +13,7 @@ All features of [7-Zip-JBinding](http://sevenzipjbind.sourceforge.net/) supporte
 - Extract password protected archives
 - Extract splitted into volumes archives
 - Extract multiple archives multithreaded
-- 8499 JUnit tests
+- 8599 JUnit tests
 - Cross-platform
 
 ## Authors
@@ -311,7 +311,7 @@ public class TestSlowExtract {
 
 ## Release Notes
 Main features of 16.02-2.01 (Release, extraction/compression/update, cross-platform, based on zip/p7zip 16.02)
-* Bind 7-Zip 16.02 (beta), In-memory archive extraction/creation/update
+* Bind 7-Zip 16.02, In-memory archive extraction/creation/update
 * Extraction of
   - 7z, Arj, BZip2, Cab, Chm, Cpio, Ar/A/Lib/Deb, Fat, GZip, HFS, Iso,
     Lzh, Lzma, Nsis, Ntfs, Rar, Rpm, Split, Tar, Udf, Wim, Xar, Z, Zip
@@ -323,7 +323,7 @@ Main features of 16.02-2.01 (Release, extraction/compression/update, cross-platf
   - Convenient archive format specific and generic compression APIs
   - Password protected archives (7z, zip) with encrypted archive headers (7z only)
 * JavaDoc + Snippets (see documentation on the web: sevenzipjbind.sf.net)
-* Over 8499 JUnit tests:
+* Over 8599 JUnit tests:
   - Initialization
   - All extraction methods
   - Compression

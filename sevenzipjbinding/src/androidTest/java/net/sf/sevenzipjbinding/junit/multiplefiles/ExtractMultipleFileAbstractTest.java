@@ -105,6 +105,7 @@ public abstract class ExtractMultipleFileAbstractTest extends ExtractFileAbstrac
 			ZipContentComparator zipContentComparator1 = new ZipContentComparator(archiveFormat, inArchive, zipFile,
                     false, context().usingPassword ? context().passwordToUse : null,
                     context().exceptionToBeExpected != null);
+            zipContentComparator1.setRemoveFilenamePrefix(getRemoveFilenamePrefix());
             addFilesToIgnore(inArchive, zipContentComparator1);
 			assertTrue(zipContentComparator1.getErrorMessage(), zipContentComparator1.isEqual());
 
@@ -112,6 +113,7 @@ public abstract class ExtractMultipleFileAbstractTest extends ExtractFileAbstrac
                     true, context().usingPassword ? context().passwordToUse : null,
                     context().exceptionToBeExpected != null);
             addFilesToIgnore(inArchive, zipContentComparator2);
+            zipContentComparator2.setRemoveFilenamePrefix(getRemoveFilenamePrefix());
 
             if (archiveFormat == ArchiveFormat.WIM) {
                 zipContentComparator2.addToIgnoreList("1.xml");
@@ -149,5 +151,9 @@ public abstract class ExtractMultipleFileAbstractTest extends ExtractFileAbstrac
                 }
             }
         }
+    }
+
+    public String getRemoveFilenamePrefix() {
+        return null;
     }
 }

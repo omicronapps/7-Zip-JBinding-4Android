@@ -310,7 +310,7 @@ public class TestSlowExtract {
 ```
 
 ## Release Notes
-Main features of 16.02-2.01beta (Release candidate, extraction/compression/update, cross-platform, based on zip/p7zip 16.02)
+Main features of 16.02-2.01 (Release, extraction/compression/update, cross-platform, based on zip/p7zip 16.02)
 * Bind 7-Zip 16.02 (beta), In-memory archive extraction/creation/update
 * Extraction of
   - 7z, Arj, BZip2, Cab, Chm, Cpio, Ar/A/Lib/Deb, Fat, GZip, Iso,

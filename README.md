@@ -35,6 +35,7 @@ allprojects {
     }
 }
 ```
+
 5. Add AAR dependency to application level `build.gradle` file (example: `MyAndroidProject/app/build.gradle`)
 ```
 dependencies {
@@ -43,6 +44,7 @@ dependencies {
 ...
 }
 ```
+
 6. Sync project
 7. SevenZip should now be possible to use by importing `net.sf.sevenzipjbinding.SevenZip`
 
@@ -339,7 +341,7 @@ Main features of 9.20-2.00beta (Release candidate, extraction/compression/update
 * Compression & update of
   - 7z, Zip, Tar, GZip, BZip2
   - Archive format specific or generic compression API
-* JavaDoc + Snippets (see documentation on the web: [sevenzipjbind.sf.net](sevenzipjbind.sf.net))
+* JavaDoc + Snippets (see documentation on the web: [sevenzipjbind.sf.net](http://sevenzipjbind.sf.net))
 * 6766 JUnit tests:
   - 7z, Zip, Tar, Rar, Lzma, Iso, GZip, Cpio, BZIP2,
     Z, Arj, Lzh, Cab, Chm, Nsis, DEB, RPM, UDF

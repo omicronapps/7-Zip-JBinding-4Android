@@ -45,8 +45,12 @@ static jobject addClassLoaderObject(JNIEnv* env, const char* name) {
     jclass clazz = env->FindClass(name);
     jclass objectClass = env->GetObjectClass(clazz);
     jmethodID classLoaderID = env->GetMethodID(objectClass, "getClassLoader", "()Ljava/lang/ClassLoader;");
+    env->DeleteLocalRef(objectClass);
     jobject classLoaderObject = env->CallObjectMethod(clazz, classLoaderID);
-    return env->NewGlobalRef(classLoaderObject);
+    env->DeleteLocalRef(clazz);
+    jobject classObject = env->NewGlobalRef(classLoaderObject);
+    env->DeleteLocalRef(classLoaderObject);
+    return classObject;
 }
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *pjvm, void *reserved) {
@@ -54,6 +58,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *pjvm, void *reserved) {
     if (pjvm->GetEnv((void**)&env, JNI_VERSION_1_6) == JNI_OK) {
         jclass classLoaderClass = env->FindClass("java/lang/ClassLoader");
         JBindingSession::_classLoaderID = env->GetMethodID(classLoaderClass, "findClass", "(Ljava/lang/String;)Ljava/lang/Class;");
+        env->DeleteLocalRef(classLoaderClass);
 
         JBindingSession::_classLoaderObjects.insert(std::make_pair(PROPERTYINFO_CLASS, addClassLoaderObject(env, PROPERTYINFO_CLASS)));
         JBindingSession::_classLoaderObjects.insert(std::make_pair(PROPID_CLASS, addClassLoaderObject(env, PROPID_CLASS)));

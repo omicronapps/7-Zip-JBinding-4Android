@@ -135,12 +135,18 @@ char * GetJavaClassName(JNIEnv * env, jclass clazz, char * buffer, size_t size) 
     jmethodID id = env->GetMethodID(reflectionClass, "getName", "()Ljava/lang/String;");
     FATALIF(id == NULL, "Method Class.getName() can't be found");
 
-    jstring string = (jstring) env->CallNonvirtualObjectMethod(clazz, reflectionClass, id);
+    jobject string = env->CallNonvirtualObjectMethod(clazz, reflectionClass, id);
     FATALIF(string == NULL, "CallNonvirtualObjectMethod() returns NULL");
+#ifdef __ANDROID_API__
+    env->DeleteLocalRef(reflectionClass);
+#endif
 
-    const char * cstr = env->GetStringUTFChars(string, NULL);
+    const char * cstr = env->GetStringUTFChars((jstring) string, NULL);
     strncpy(buffer, cstr, size);
-    env->ReleaseStringUTFChars(string, cstr);
+    env->ReleaseStringUTFChars((jstring) string, cstr);
+#ifdef __ANDROID_API__
+    env->DeleteLocalRef(string);
+#endif
 
     return buffer;
 }
@@ -170,6 +176,9 @@ void SetLongAttribute(JNIEnv * env, jobject object, const char * attribute, jlon
     jfieldID fieldID = env->GetFieldID(clazz, attribute, "J");
     FATALIF2(fieldID == NULL, "Field '%s' in the class '%s' was not found", attribute,
             GetJavaClassName(env, clazz, classname, sizeof(classname)));
+#ifdef __ANDROID_API__
+    env->DeleteLocalRef(clazz);
+#endif
 
     env->SetLongField(object, fieldID, value);
 }

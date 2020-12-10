@@ -240,6 +240,9 @@ JNINativeCallContext::~JNINativeCallContext() {
             }
             sevenZipException = static_cast<jthrowable> (jni::SevenZipException::newInstance(
                     _jniCallOriginalEnv, message));
+#ifdef __ANDROID_API__
+            _jniCallOriginalEnv->DeleteLocalRef(message);
+#endif
             assertNoExceptionOnJniCallOriginalEnv();
 
             if (_firstThrownException) {

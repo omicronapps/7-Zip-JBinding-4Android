@@ -85,6 +85,9 @@ UInt32 *indexInArchive /* -1 if there is no in archive, or if doesn't matter */
                 if (jniEnvInstance.exceptionCheck()) {
                     return S_FALSE;
                 }
+#ifdef __ANDROID_API__
+                jniEnvInstance->DeleteLocalRef(newDataObject);
+#endif
             } else {
                 jniEnvInstance.reportError("The attribute 'updateNewData' of the corresponding IOutItem* class shouldn't be null (index=%i)", index);
                 return S_FALSE;
@@ -110,6 +113,9 @@ UInt32 *indexInArchive /* -1 if there is no in archive, or if doesn't matter */
                 if (jniEnvInstance.exceptionCheck()) {
                     return S_FALSE;
                 }
+#ifdef __ANDROID_API__
+                jniEnvInstance->DeleteLocalRef(newPropertiesObject);
+#endif
             } else {
                 jniEnvInstance.reportError("The attribute 'updateNewProperties' of the corresponding IOutItem* class shouldn't be null (index=%i)", index);
                 return S_FALSE;
@@ -135,6 +141,9 @@ UInt32 *indexInArchive /* -1 if there is no in archive, or if doesn't matter */
                 if (jniEnvInstance.exceptionCheck()) {
                     return S_FALSE;
                 }
+#ifdef __ANDROID_API__
+                jniEnvInstance->DeleteLocalRef(oldArchiveItemIndexObject);
+#endif
             } else {
                 *indexInArchive = (UInt32) -1;
             }

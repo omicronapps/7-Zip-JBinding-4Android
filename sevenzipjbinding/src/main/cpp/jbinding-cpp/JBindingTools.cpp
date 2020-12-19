@@ -125,7 +125,10 @@ jclass findClass(JNIEnv* env, const char* name) {
     if (env->ExceptionCheck()) {
         env->ExceptionClear();
     }
-    return static_cast<jclass>(env->CallObjectMethod(JBindingSession::_classLoaderObjects.at(name), JBindingSession::_classLoaderID, env->NewStringUTF(name)));
+    jstring string = env->NewStringUTF(name);
+    jclass clazz = static_cast<jclass>(env->CallObjectMethod(JBindingSession::_classLoaderObjects.at(name), JBindingSession::_classLoaderID, string));
+    env->DeleteLocalRef(string);
+    return clazz;
 }
 #endif
 

@@ -1,4 +1,28 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+ext {
+    bintrayRepo = '7-Zip-JBinding-4Android'
+    bintrayName = 'net.sf.sevenzipjbinding'
+    libraryName = 'sevenzipjbinding'
+
+    publishedGroupId = 'net.sf.sevenzipjbinding'
+    artifact = 'sevenzipjbinding'
+    libraryVersion = '16.02-2.01'
+
+    libraryDescription = 'Android Java wrapper for 7z archiver engine'
+    siteUrl = 'https://github.com/omicronapps/7-Zip-JBinding-4Android'
+    gitUrl = 'https://github.com/omicronapps/7-Zip-JBinding-4Android.git'
+
+    developerId = 'omicronapps'
+    developerName = 'Fredrik Claesson'
+    developerEmail = 'info@omicronapplications.com'
+
+    licenseName = 'GNU Lesser General Public License, version 2.1'
+    licenseUrl = 'https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html'
+    allLicenses = ["LGPL-2.1"]
+}
 
 android {
     compileSdkVersion 29
@@ -27,7 +51,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 }

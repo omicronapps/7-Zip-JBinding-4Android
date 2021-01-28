@@ -13,6 +13,9 @@
 #define JAVA_OBJECT "java/lang/Object"
 #define JAVA_OBJECT_T JAVA_MAKE_SIGNATURE_TYPE(JAVA_OBJECT)
 
+#define JAVA_CLASS "java/lang/Class"
+#define JAVA_CLASS_T JAVA_MAKE_SIGNATURE_TYPE(JAVA_CLASS)
+
 #define JAVA_BYTE "java/lang/Byte"
 #define JAVA_BYTE_T JAVA_MAKE_SIGNATURE_TYPE(JAVA_BYTE)
 
@@ -53,6 +56,10 @@ JT_BEGIN_CLASS("java/util", Date)
     JT_CLASS_VIRTUAL_METHOD(Long, getTime, _)
 JT_END_CLASS
 
+JT_BEGIN_CLASS("java/lang", ClassLoader)
+    JT_CLASS_VIRTUAL_METHOD_OBJECT(JAVA_CLASS_T, loadClass, JT_STRING(name, _))
+JT_END_CLASS
+
 JT_BEGIN_CLASS("java/lang", Integer)
     JT_CLASS_VIRTUAL_METHOD(Int, intValue, _)
     JT_CLASS_STATIC_METHOD_OBJECT(JAVA_INTEGER_T, valueOf, JT_INT(value, _))
@@ -68,6 +75,10 @@ JT_BEGIN_CLASS("java/lang", Boolean)
 JT_END_CLASS
 
 JT_BEGIN_CLASS("java/lang", NoSuchMethodError)
+JT_END_CLASS
+
+JT_BEGIN_CLASS("java/lang", Throwable)
+    JT_CLASS_VIRTUAL_METHOD(Void, printStackTrace, _)
 JT_END_CLASS
 
 JT_BEGIN_CLASS("java/lang", ExceptionInInitializerError)

@@ -20,7 +20,6 @@ class JNIEnvInstance;
 
 #ifdef __ANDROID_API__
 namespace jni { inline void prepareExceptionCheck(JNIEnv * env); }
-jclass findClass(JNIEnv* env, const char* name);
 #endif
 
 template<typename T>

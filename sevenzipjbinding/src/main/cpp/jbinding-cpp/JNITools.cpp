@@ -47,7 +47,7 @@ static void localinit(JNIEnv * env) {
     g_IntegerClass = env->FindClass(JAVA_INTEGER);
 #ifdef __ANDROID_API__
     if (g_IntegerClass == nullptr) {
-        g_IntegerClass = findClass(env, JAVA_INTEGER);
+        g_IntegerClass = jni::findClass(env, JAVA_INTEGER);
     }
 #endif
     FATALIF(g_IntegerClass == NULL, "Can't find Integer class");
@@ -63,7 +63,7 @@ static void localinit(JNIEnv * env) {
     g_LongClass = env->FindClass(JAVA_LONG);
 #ifdef __ANDROID_API__
     if (g_LongClass == nullptr) {
-        g_LongClass = findClass(env, JAVA_LONG);
+        g_LongClass = jni::findClass(env, JAVA_LONG);
     }
 #endif
     FATALIF(g_LongClass == NULL, "Can't find Long class");
@@ -78,7 +78,7 @@ static void localinit(JNIEnv * env) {
     g_DoubleClass = env->FindClass(JAVA_DOUBLE);
 #ifdef __ANDROID_API__
     if (g_DoubleClass == nullptr) {
-        g_DoubleClass = findClass(env, JAVA_DOUBLE);
+        g_DoubleClass = jni::findClass(env, JAVA_DOUBLE);
     }
 #endif
     FATALIF(g_DoubleClass == NULL, "Can't find Double class");
@@ -89,7 +89,7 @@ static void localinit(JNIEnv * env) {
     g_BooleanClass = env->FindClass(JAVA_BOOLEAN);
 #ifdef __ANDROID_API__
     if (g_BooleanClass == nullptr) {
-        g_BooleanClass = findClass(env, JAVA_BOOLEAN);
+        g_BooleanClass = jni::findClass(env, JAVA_BOOLEAN);
     }
 #endif
     FATALIF(g_BooleanClass == NULL, "Can't find Boolean class");
@@ -105,7 +105,7 @@ static void localinit(JNIEnv * env) {
     g_StringClass = env->FindClass(JAVA_STRING);
 #ifdef __ANDROID_API__
     if (g_StringClass == nullptr) {
-        g_StringClass = findClass(env, JAVA_STRING);
+        g_StringClass = jni::findClass(env, JAVA_STRING);
     }
 #endif
     FATALIF(g_StringClass == NULL, "Can't find String class");
@@ -114,7 +114,7 @@ static void localinit(JNIEnv * env) {
     g_DateClass = env->FindClass("java/util/Date");
 #ifdef __ANDROID_API__
     if (g_DateClass == nullptr) {
-        g_DateClass = findClass(env, "java/util/Date");
+        g_DateClass = jni::findClass(env, "java/util/Date");
     }
 #endif
     FATALIF(g_DateClass == NULL, "Can't find java.util.Date class");

@@ -21,7 +21,7 @@ public:
         jclass cryptoGetTextPasswordClass = initEnv->FindClass(CRYPTOGETTEXTPASSWORD_CLASS);
 #ifdef __ANDROID_API__
         if (cryptoGetTextPasswordClass == nullptr) {
-            cryptoGetTextPasswordClass = findClass(initEnv, CRYPTOGETTEXTPASSWORD_CLASS);
+            cryptoGetTextPasswordClass = jni::findClass(initEnv, CRYPTOGETTEXTPASSWORD_CLASS);
         }
 #endif
         FATALIF(cryptoGetTextPasswordClass == NULL,

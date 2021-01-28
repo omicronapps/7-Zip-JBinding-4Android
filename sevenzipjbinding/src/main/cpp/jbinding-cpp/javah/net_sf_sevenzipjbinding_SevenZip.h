@@ -29,7 +29,7 @@ JNIEXPORT void JNICALL Java_net_sf_sevenzipjbinding_SevenZip_nativeCreateArchive
  * Signature: ()Ljava/lang/String;
  */
 JNIEXPORT jstring JNICALL Java_net_sf_sevenzipjbinding_SevenZip_nativeInitSevenZipLibrary
-  (JNIEnv *, jclass);
+  (JNIEnv *, jclass, jobject);
 
 /*
  * Class:     net_sf_sevenzipjbinding_SevenZip

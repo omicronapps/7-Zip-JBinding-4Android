@@ -57,9 +57,16 @@
 #endif
 
 #ifdef TRACE_ON
+#ifdef __ANDROID_API__
+#include <android/log.h>
+#include <sstream>
+#   define TRACE(msg) {std::ostringstream oss; oss << msg; std::string str = oss.str();  __android_log_print(ANDROID_LOG_INFO, "TRACE", str.c_str());}
+#   define _TRACE(msg) {std::ostringstream oss; oss << msg; std::string str = oss.str(); __android_log_print(ANDROID_LOG_INFO, "Debug", str.c_str());}
+#else
 #   define TRACE(msg) _TRACE("TRACE: " << msg << std::endl)
 #   define _TRACE(msg) {std::cout << msg;}
 /**/int trace_printf(const char * fmt, ...);
+#endif
 #else
 #   define TRACE(msg) {}
 #   define _TRACE(msg) {}

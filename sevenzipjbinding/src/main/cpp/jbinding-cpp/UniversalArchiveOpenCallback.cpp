@@ -19,7 +19,7 @@ void UniversalArchiveOpencallback::Init(JBindingSession & jbindingSession, JNIEn
     jclass cryptoGetTextPasswordClass = initEnv->FindClass(CRYPTOGETTEXTPASSWORD_CLASS);
 #ifdef __ANDROID_API__
     if (cryptoGetTextPasswordClass == nullptr) {
-        cryptoGetTextPasswordClass = findClass(initEnv, CRYPTOGETTEXTPASSWORD_CLASS);
+        cryptoGetTextPasswordClass = jni::findClass(initEnv, CRYPTOGETTEXTPASSWORD_CLASS);
     }
 #endif
     FATALIF(cryptoGetTextPasswordClass == NULL,
@@ -28,7 +28,7 @@ void UniversalArchiveOpencallback::Init(JBindingSession & jbindingSession, JNIEn
     jclass archiveOpenVolumeCallbackClass = initEnv->FindClass(ARCHIVEOPENVOLUMECALLBACK_CLASS);
 #ifdef __ANDROID_API__
     if (archiveOpenVolumeCallbackClass == nullptr) {
-        archiveOpenVolumeCallbackClass = findClass(initEnv, ARCHIVEOPENVOLUMECALLBACK_CLASS);
+        archiveOpenVolumeCallbackClass = jni::findClass(initEnv, ARCHIVEOPENVOLUMECALLBACK_CLASS);
     }
 #endif
     FATALIF(cryptoGetTextPasswordClass == NULL,

@@ -50,13 +50,16 @@ static inline bool IsItWindowsNT()
  * Signature: ()Ljava/lang/String;
  */
 JBINDING_JNIEXPORT jstring JNICALL
-Java_net_sf_sevenzipjbinding_SevenZip_nativeInitSevenZipLibrary(JNIEnv * env, jclass thiz) {
+Java_net_sf_sevenzipjbinding_SevenZip_nativeInitSevenZipLibrary(JNIEnv * env, jclass thiz, jobject classLoader) {
 
     TRACE("7-zip library initialized")
 
 	codecTools.init();
 
+    jni::sevenZipClassLoader = env->NewGlobalRef(classLoader);
     jni::OutOfMemoryError::_initialize(env);
+    jni::Throwable::_initialize(env);
+    jni::ClassLoader::_initialize(env);
 
     //if (msg) {
     //	TRACE1("Error initializing 7-zip library: %s", msg)

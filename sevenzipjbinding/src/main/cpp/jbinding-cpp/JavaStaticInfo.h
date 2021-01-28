@@ -628,6 +628,10 @@
 
 namespace jni {
 
+extern jobject sevenZipClassLoader;
+
+jclass findClass(JNIEnv * env, const char * className);
+
 inline void expectExceptionCheck(JNIEnv * env) {
 #ifdef JNI_TOOLS_DEBUG_CALL_AND_EXCEPTION_CLEAR_BEHAVIOR
     TRACE("Expect exception check")

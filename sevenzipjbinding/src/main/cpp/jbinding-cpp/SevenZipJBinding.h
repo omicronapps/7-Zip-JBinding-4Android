@@ -23,6 +23,9 @@
 
 #define SEVENZIPJBINDING_LIBRARY_NAME_FILENAME "./7z.dll"
 
+#define SEVEN_ZIP_PACKAGE      "net/sf/sevenzipjbinding"
+#define SEVEN_ZIP_PACKAGE_IMPL "net/sf/sevenzipjbinding/impl"
+
 
 #define SEVEN_ZIP_EXCEPTION "net/sf/sevenzipjbinding/SevenZipException"
 #define SEVEN_ZIP_EXCEPTION_T JAVA_MAKE_SIGNATURE_TYPE(SEVEN_ZIP_EXCEPTION)

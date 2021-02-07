@@ -19,8 +19,9 @@ class JBindingSession;
 class JNIEnvInstance;
 
 #ifdef __ANDROID_API__
+#include <string>
 namespace jni { inline void prepareExceptionCheck(JNIEnv * env); }
-jclass findClass(JNIEnv* env, const char* name);
+jclass findClass(JNIEnv* env, std::string name);
 #endif
 
 template<typename T>
@@ -67,7 +68,7 @@ class JBindingSession {
 #ifdef __ANDROID_API__
 public:
     static jmethodID _classLoaderID;
-    static std::map<const char*, jobject> _classLoaderObjects;
+    static std::map<std::string, jobject> _classLoaderObjects;
 #endif
 
 #ifdef USE_MY_ASSERTS

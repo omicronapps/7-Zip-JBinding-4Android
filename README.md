@@ -23,7 +23,8 @@ All features of [7-Zip-JBinding](http://sevenzipjbind.sourceforge.net/) supporte
 7-Zip-JBinding-4Android is currently not available on JCenter due to package name conflict with the 7-Zip-JBinding JAR library. However, it is possible to import the AAR library in Gradle by declaring JFrog Bintray as an exclusive repository for the AAR artifact.
 1. Declare AAR artifact repository and add dependency to application level `build.gradle` file (example: `MyAndroidProject/app/build.gradle`)
 ```
-repositories {exclusiveContent {
+repositories {
+    exclusiveContent {
         forRepository {
             maven {
                 url 'https://dl.bintray.com/omicronapps/7-Zip-JBinding-4Android'

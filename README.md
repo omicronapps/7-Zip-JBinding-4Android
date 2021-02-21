@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.sf.sevenzipjbinding:sevenzipjbinding:16.02-2.01'
+    implementation 'net.sf.sevenzipjbinding:sevenzipjbinding:16.02-2.02'
 }
 ```
 2. Sync project
@@ -307,6 +307,10 @@ public class TestSlowExtract {
 ```
 
 ## Release Notes
+Main features of 16.02-2.02 (Release, cross-platform, based on zip/p7zip 16.02)
+* Bugfix #5 RandomAccessFileOutStream should implement Closeable
+  - (https://github.com/borisbrodski/sevenzipjbinding/issues/5)
+
 Main features of 16.02-2.01 (Release, extraction/compression/update, cross-platform, based on zip/p7zip 16.02)
 * Bind 7-Zip 16.02, In-memory archive extraction/creation/update
 * Extraction of

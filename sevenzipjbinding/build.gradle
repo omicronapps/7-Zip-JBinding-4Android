@@ -9,7 +9,7 @@ ext {
 
     publishedGroupId = 'net.sf.sevenzipjbinding'
     artifact = 'sevenzipjbinding'
-    libraryVersion = '16.02-2.01'
+    libraryVersion = '16.02-2.02'
 
     libraryDescription = 'Android Java wrapper for 7z archiver engine'
     siteUrl = 'https://github.com/omicronapps/7-Zip-JBinding-4Android'
@@ -31,7 +31,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 29
         versionCode 1
-        versionName "16.02-2.01"
+        versionName "16.02-2.02"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }

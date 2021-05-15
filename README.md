@@ -20,28 +20,24 @@ All features of [7-Zip-JBinding](http://sevenzipjbind.sourceforge.net/) supporte
 7-Zip was created by Igor Pavlov ([7-Zip Web Site](https://www.7-zip.org/links.html)), with 7-Zip-JBinding initially designed and implemented by Boris Brodski ([7-Zip-JBinding Web Site](http://sevenzipjbind.sourceforge.net/)). 7-Zip-JBinding was adapted for Android by Fredrik Claesson.
 
 ## Usage
-7-Zip-JBinding-4Android is currently not available on JCenter due to package name conflict with the 7-Zip-JBinding JAR library. However, it is possible to import the AAR library in Gradle by declaring JFrog Bintray as an exclusive repository for the AAR artifact.
-1. Declare AAR artifact repository and add dependency to application level `build.gradle` file (example: `MyAndroidProject/app/build.gradle`)
+7-Zip-JBinding-4Android is currently not available on JCenter due to package name conflict with the 7-Zip-JBinding JAR library. However, it is possible to import the AAR library in Gradle from the JitPack repository.
+1. Add the JitPack repository to project level `build.gradle` file (example: `MyAndroidProject/build.gradle`)
 ```
-repositories {
-    exclusiveContent {
-        forRepository {
-            maven {
-                url 'https://dl.bintray.com/omicronapps/7-Zip-JBinding-4Android'
-            }
-        }
-        filter {
-            includeGroup "net.sf.sevenzipjbinding"
-        }
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
     }
 }
-
+```
+2. Add dependency to application level `build.gradle` file (example: `MyAndroidProject/app/build.gradle`)
+```
 dependencies {
-    implementation 'net.sf.sevenzipjbinding:sevenzipjbinding:16.02-2.02'
+    implementation 'com.github.omicronapps:7-Zip-JBinding-4Android:Release-16.02-2.02'
 }
 ```
-2. Sync project
-3. SevenZip should now be possible to use by importing `net.sf.sevenzipjbinding.SevenZip`
+3. Sync project
+4. SevenZip should now be possible to use by importing `net.sf.sevenzipjbinding.SevenZip`
 
 ## Examples
 Examples of opening an existing archive, along with listing and extracting the contents are provided below.

@@ -20,7 +20,7 @@ All features of [7-Zip-JBinding](http://sevenzipjbind.sourceforge.net/) supporte
 7-Zip was created by Igor Pavlov ([7-Zip Web Site](https://www.7-zip.org/links.html)), with 7-Zip-JBinding initially designed and implemented by Boris Brodski ([7-Zip-JBinding Web Site](http://sevenzipjbind.sourceforge.net/)). 7-Zip-JBinding was adapted for Android by Fredrik Claesson.
 
 ## Usage
-The 7-Zip-JBinding-4Android AAR library can be impoerted in Gradle from the JitPack repository.
+The 7-Zip-JBinding-4Android AAR library can be imported in Gradle from the JitPack repository.
 1. Add the JitPack repository to project level `build.gradle` file (example: `MyAndroidProject/build.gradle`)
 ```
 allprojects {

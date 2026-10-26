@@ -2,6 +2,7 @@ package net.sf.sevenzipjbinding.junit.compression;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -10,11 +11,13 @@ import java.util.GregorianCalendar;
 import org.junit.Test;
 
 import net.sf.sevenzipjbinding.ArchiveFormat;
+import net.sf.sevenzipjbinding.ICryptoGetTextPassword;
 import net.sf.sevenzipjbinding.IInArchive;
 import net.sf.sevenzipjbinding.IOutCreateArchive7z;
 import net.sf.sevenzipjbinding.IOutCreateCallback;
 import net.sf.sevenzipjbinding.IOutItem7z;
 import net.sf.sevenzipjbinding.ISequentialInStream;
+import net.sf.sevenzipjbinding.PropID;
 import net.sf.sevenzipjbinding.SevenZip;
 import net.sf.sevenzipjbinding.SevenZipException;
 import net.sf.sevenzipjbinding.impl.OutItemFactory;
@@ -33,6 +36,8 @@ import net.sf.sevenzipjbinding.util.ByteArrayStream;
  * @since 9.20-2.00
  */
 public class StandaloneCompressSevenZipTest extends JUnitNativeTestBase<VoidContext>{
+    private static final String PASSWORD = "test-pass-321";
+
     private class OutCreateArchive7z implements IOutCreateCallback<IOutItem7z> {
         public void setTotal(long total) throws SevenZipException {
         }
@@ -59,6 +64,12 @@ public class StandaloneCompressSevenZipTest extends JUnitNativeTestBase<VoidCont
 
         public ISequentialInStream getStream(int index) throws SevenZipException {
             return virtualContent.getItemStream(index);
+        }
+    }
+
+    private class OutCreateArchive7zWithPassword extends OutCreateArchive7z implements ICryptoGetTextPassword {
+        public String cryptoGetTextPassword() throws SevenZipException {
+            return PASSWORD;
         }
     }
 
@@ -95,6 +106,75 @@ public class StandaloneCompressSevenZipTest extends JUnitNativeTestBase<VoidCont
 
         IInArchive inArchive = closeLater(SevenZip.openInArchive(ArchiveFormat.SEVEN_ZIP, byteArrayStream));
         virtualContent.verifyInArchive(inArchive);
+    }
+
+    @Test
+    public void testHeaderEncryptionWithOtherFeatures() throws Exception {
+        virtualContent = new VirtualContent(new VirtualContentConfiguration());
+        virtualContent.fillRandomly(10, 2, 2, 100, 50, null, false);
+
+        ByteArrayStream byteArrayStream = new ByteArrayStream(100000);
+        IOutCreateArchive7z outArchive = closeLater(SevenZip.openOutArchive7z());
+
+        // Regression test for issue #77: every one of these properties must be
+        // retained when header encryption is enabled.
+        outArchive.setLevel(5);
+        outArchive.setSolid(true);
+        outArchive.setSolidSize(8192);
+        outArchive.setThreadCount(2);
+        outArchive.setHeaderEncryption(true);
+
+        outArchive.createArchive(byteArrayStream, virtualContent.getItemCount(), new OutCreateArchive7zWithPassword());
+        outArchive.close();
+
+        byteArrayStream.rewind();
+        try {
+            IInArchive inArchive = SevenZip.openInArchive(ArchiveFormat.SEVEN_ZIP, byteArrayStream);
+            inArchive.close();
+            fail("Archive header should require a password");
+        } catch (SevenZipException expected) {
+        }
+
+        byteArrayStream.rewind();
+        IInArchive inArchive = closeLater(SevenZip.openInArchive(ArchiveFormat.SEVEN_ZIP, byteArrayStream, PASSWORD));
+        virtualContent.verifyInArchive(inArchive, PASSWORD);
+    }
+
+    @Test
+    public void testDictionarySizeWithOtherFeatures() throws Exception {
+        virtualContent = new VirtualContent(new VirtualContentConfiguration());
+        // Every file is larger than the dictionary, so 7-Zip has no reason to use a smaller one.
+        virtualContent.fillRandomly(4, 1, 1, 100000, 50000, null, false);
+
+        ByteArrayStream byteArrayStream = new ByteArrayStream(1000000);
+        IOutCreateArchive7z outArchive = closeLater(SevenZip.openOutArchive7z());
+
+        // The dictionary size must be retained together with all other properties: 7-Zip resets every
+        // property on each ISetProperties.SetProperties() call.
+        outArchive.setLevel(5);
+        outArchive.setDictionarySize(1 << 16);
+        outArchive.setSolid(false);
+        outArchive.setThreadCount(2);
+
+        outArchive.createArchive(byteArrayStream, virtualContent.getItemCount(),
+                callbackTesterCreateArchive.getProxyInstance());
+        outArchive.close();
+
+        byteArrayStream.rewind();
+        IInArchive inArchive = closeLater(SevenZip.openInArchive(ArchiveFormat.SEVEN_ZIP, byteArrayStream));
+        virtualContent.verifyInArchive(inArchive);
+
+        assertEquals(Boolean.FALSE, inArchive.getArchiveProperty(PropID.SOLID));
+        int countOfFiles = 0;
+        for (int i = 0; i < inArchive.getNumberOfItems(); i++) {
+            if (Boolean.TRUE.equals(inArchive.getProperty(i, PropID.IS_FOLDER))) {
+                continue;
+            }
+            countOfFiles++;
+            // 7-Zip prints a power-of-two dictionary size as its exponent: 2^16 bytes.
+            assertEquals("LZMA2:16", inArchive.getProperty(i, PropID.METHOD));
+        }
+        assertEquals(Integer.valueOf(countOfFiles), inArchive.getArchiveProperty(PropID.NUM_BLOCKS));
     }
 
     Date substructDate(Date date, int day) {

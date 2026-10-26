@@ -9,35 +9,11 @@ extern "C" {
 #endif
 /*
  * Class:     net_sf_sevenzipjbinding_impl_OutArchiveImpl
- * Method:    nativeSetHeaderEncryption
- * Signature: (Z)V
+ * Method:    nativeSetProperties
+ * Signature: (IIILjava/lang/String;ZLjava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_net_sf_sevenzipjbinding_impl_OutArchiveImpl_nativeSetHeaderEncryption
-  (JNIEnv *, jobject, jboolean);
-
-/*
- * Class:     net_sf_sevenzipjbinding_impl_OutArchiveImpl
- * Method:    nativeSetLevel
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_net_sf_sevenzipjbinding_impl_OutArchiveImpl_nativeSetLevel
-  (JNIEnv *, jobject, jint);
-
-/*
- * Class:     net_sf_sevenzipjbinding_impl_OutArchiveImpl
- * Method:    nativeSetSolidSpec
- * Signature: (Ljava/lang/String;)V
- */
-JNIEXPORT void JNICALL Java_net_sf_sevenzipjbinding_impl_OutArchiveImpl_nativeSetSolidSpec
-  (JNIEnv *, jobject, jstring);
-
-/*
- * Class:     net_sf_sevenzipjbinding_impl_OutArchiveImpl
- * Method:    nativeSetMultithreading
- * Signature: (I)V
- */
-JNIEXPORT void JNICALL Java_net_sf_sevenzipjbinding_impl_OutArchiveImpl_nativeSetMultithreading
-  (JNIEnv *, jobject, jint);
+JNIEXPORT void JNICALL Java_net_sf_sevenzipjbinding_impl_OutArchiveImpl_nativeSetProperties
+  (JNIEnv *, jobject, jint, jint, jint, jstring, jboolean, jstring);
 
 /*
  * Class:     net_sf_sevenzipjbinding_impl_OutArchiveImpl
